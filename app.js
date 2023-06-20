@@ -17,6 +17,7 @@ const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
+require("./session")(app);
 
 const capitalize = require("./utils/capitalize");
 const projectName = "stylio";
@@ -29,6 +30,18 @@ app.use("/", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
+
+
+const productRoutes = require("./routes/product.routes");
+app.use("/product", productRoutes);
+
+const orderRoutes = require("./routes/order.routes");
+app.use("/order", orderRoutes);
+
+const categoryRoutes = require("./routes/category.routes");
+app.use("/category", categoryRoutes);
+
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
