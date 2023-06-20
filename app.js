@@ -17,7 +17,7 @@ const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
-require("./session")(app);
+require("./config/session")(app)
 
 const capitalize = require("./utils/capitalize");
 const projectName = "stylio";
