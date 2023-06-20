@@ -175,7 +175,7 @@
     var window_width = jQuery(window).width();
     if ((window_width) > '1199') {
         $("#toggle-sidebar").click(function () {
-            $(".marketplace-sidebar").slideToggle('slow');
+            $(".marketplace-sidebar").slideToggle(5);
         });
     }
     if ((window_width) < '1199') {
