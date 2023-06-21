@@ -1,0 +1,40 @@
+<div id="form">
+  <h2>Sign Up</h2>
+  <form action="/auth/register" method="post">
+
+    <label> Username
+      <input type="text" name="username" placeholder="username" required/>
+    </label>
+
+    <label> Email
+      <input type="email" name="email" placeholder="email" />
+    </label>
+
+    <label> Password
+      <input type="password" name="password" placeholder="password" />
+    </label>
+
+     {{!-- <label> Shipping Address
+      <input type="text" name=" shipping_address" placeholder="home address" required/>
+    </label> --}}
+
+     <label  for="mobile_number"> Mobile Number
+      <input type="tel" id="mobile_number" name="mobile_number" placeholder="00 890-183-98" required />
+    </label>
+
+    <label> State
+      <input type="text" name="state" placeholder="Your state" required/>
+    </label>
+
+     <label> Country
+      <input type="text" name="country" placeholder="Your country" required/>
+    </label>
+
+    <button type="submit">Sign Up</button> 
+
+
+    {{#if errorMessage}}
+      <p class="error">{{errorMessage}}</p>
+    {{/if}}
+  </form>
+</div>

@@ -92,13 +92,15 @@
               </div>
             </div>
             <div>
-              <form class="form_search" role="form">
-                <input id="query search-autocomplete" type="search" placeholder="Search any home decor items..."
+              <form class="form_search" role="form" action="/auth/search" method="get"> 
+                <input id="query search-autocomplete" type="text" name="surname" placeholder="Search any home decor items..."
                   class="nav-search nav-search-field" aria-expanded="true">
-                <button type="submit" name="nav-submit-button" class="btn-search">
+                <button type="submit" class="btn-search">
                   <i class="ti-search"></i>
                 </button>
+                
               </form>
+          
             </div>
             <div class="menu-right pull-right">
               <div>

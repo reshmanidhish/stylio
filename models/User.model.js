@@ -54,7 +54,15 @@ const userSchema = new Schema(
       type: Date,
     }
 
-  },
+  //   created_date: {
+  //     type: Date,
+  //   },
+
+  //   updated_date: {
+  //     type: Date,
+  //   }
+
+   },
   
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

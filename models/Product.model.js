@@ -19,9 +19,9 @@ const productSchema = new Schema(
         type: Schema.Types.ObjectId, ref: "Category" 
     }],
 
-    dimensions: {
+    // dimensions: {
 
-    },
+    // },
 
     brand_name: {
       type: String,

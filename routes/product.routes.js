@@ -19,4 +19,22 @@ router.post('/create',  (req, res, nex)=> {
 
 
 
+// router.get('/search', async (req, res, nex)=> {
+//     try{
+//   if(req.session.currentUser !== ""){
+//     const allProductDB = await Product.findOne({name: req.session.currentUser.name})
+//     console.log(allProductDB)
+//     allProductDB.loggedIn = true;
+//     res.render('/form_search', allProductDB)
+//   }else{
+//     res.render("/form_search")
+//   }
+//     }
+// catch(err){
+//     console.log('' ,err)
+// }
+// });
+
+
+
 module.exports = router;

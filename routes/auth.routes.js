@@ -16,70 +16,81 @@ const User = require("../models/User.model");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-// GET /auth/signup
-router.get("/signup", isLoggedOut, (req, res) => {
-  res.render("auth/signup");
+// GET /auth/register
+
+
+
+router.get("/register", isLoggedOut, (req, res) => {
+  if(req.session.currentUser){
+    res.render("auth/register");
+  }
+  res.render("auth/register");
 });
 
-// POST /auth/signup
-router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, email, password } = req.body;
 
-  // Check that username, email, and password are provided
+
+
+router.post("/register", isLoggedOut,  async (req, res) => {
+try{
+  const {username,   email,  password,   shipping_address,   mobile_number ,  state, country } = req.body;
+
   if (username === "" || email === "" || password === "") {
-    res.status(400).render("auth/signup", {
+    res.status(400).render("auth/register", {
       errorMessage:
         "All fields are mandatory. Please provide your username, email and password.",
     });
-
     return;
   }
 
   if (password.length < 6) {
-    res.status(400).render("auth/signup", {
+    res.status(400).render("auth/register", {
       errorMessage: "Your password needs to be at least 6 characters long.",
     });
-
     return;
   }
 
-  //   ! This regular expression checks password for special characters and minimum length
-  /*
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-  if (!regex.test(password)) {
-    res
-      .status(400)
-      .render("auth/signup", {
-        errorMessage: "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter."
-    });
-    return;
-  }
-  */
+  const salt = await bcrypt.genSalt(saltRounds)
+  const hashedpassword = await bcrypt.hash(password, salt)
+  const userFromDB = await User.create({username, email,  password: hashedpassword, shipping_address,  mobile_number ,  state, country })
+  
+  req.session.currentUser = {username, email}
+  console.log("newely user was created", userFromDB)
+  res.redirect(`/auth/profile`)
 
-  // Create a new user - start by hashing the password
-  bcrypt
-    .genSalt(saltRounds)
-    .then((salt) => bcrypt.hash(password, salt))
-    .then((hashedPassword) => {
-      // Create a user and save it in the database
-      return User.create({ username, email, password: hashedPassword });
-    })
-    .then((user) => {
-      res.redirect("/auth/login");
-    })
-    .catch((error) => {
+  }
+  
+    catch(error) {
       if (error instanceof mongoose.Error.ValidationError) {
-        res.status(500).render("auth/signup", { errorMessage: error.message });
+        res.status(500).render("auth/register", { errorMessage: error.message });
       } else if (error.code === 11000) {
-        res.status(500).render("auth/signup", {
+        res.status(500).render("auth/register", {
           errorMessage:
             "Username and email need to be unique. Provide a valid username or email.",
         });
       } else {
         next(error);
-      }
-    });
+    }
+  }
 });
+
+
+
+// router.get("/profile", async (req, res, next) => {
+//   try {
+
+// if(req.session.currentUser){
+// const findUserfromDB = await User.findOne({username})
+//    console.log(findUserfromDB)
+//    findUserfromDB.loggedIn =true;
+//    res.redirect('/auth/profile', findUserfromDB)
+// }else{
+//   res.render('auth/register')
+// }
+//   }
+//   catch(err){
+//     console.log('error while rendering profile', err)
+// }
+// });
 
 // GET /auth/login
 router.get("/login", isLoggedOut, (req, res) => {
@@ -96,7 +107,6 @@ router.post("/login", isLoggedOut, (req, res, next) => {
       errorMessage:
         "All fields are mandatory. Please provide username, email and password.",
     });
-
     return;
   }
 
@@ -153,5 +163,26 @@ router.get("/logout", isLoggedIn, (req, res) => {
     res.redirect("/");
   });
 });
+
+
+
+
+
+router.get('/search', isLoggedOut, async (req, res, nex)=> {
+  try{
+if(req.session.currentUser !== ""){
+  const allProductDB = await User.find()
+  console.log(allProductDB)
+  // allProductDB.loggedIn = true;
+  res.render('search', {allProductDB: allProductDB})
+}else{
+  res.render("search")
+}
+  }
+catch(err){
+  console.log('' ,err)
+}
+});
+
 
 module.exports = router;
