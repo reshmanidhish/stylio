@@ -20,9 +20,9 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 
 
-router.get("/register", isLoggedOut, (req, res) => {
+router.get("/register", (req, res, next) => {
   if(req.session.currentUser){
-    res.render("auth/register");
+    res.render("auth/register", {loggedIn: true});
   }
   res.render("auth/register");
 });
@@ -30,11 +30,11 @@ router.get("/register", isLoggedOut, (req, res) => {
 
 
 
-router.post("/register", isLoggedOut,  async (req, res) => {
+router.post("/register", async (req, res, next) => {
 try{
-  const {username,   email,  password,   shipping_address,   mobile_number ,  state, country } = req.body;
+  const {firstName, lastName, email, password} = req.body;
 
-  if (username === "" || email === "" || password === "") {
+  if ( email === "" || password === "") {
     res.status(400).render("auth/register", {
       errorMessage:
         "All fields are mandatory. Please provide your username, email and password.",
@@ -51,9 +51,9 @@ try{
 
   const salt = await bcrypt.genSalt(saltRounds)
   const hashedpassword = await bcrypt.hash(password, salt)
-  const userFromDB = await User.create({username, email,  password: hashedpassword, shipping_address,  mobile_number ,  state, country })
+  const userFromDB = await User.create({ email, firstName, lastName , password: hashedpassword})
   
-  req.session.currentUser = {username, email}
+  req.session.currentUser = {email, firstName, lastName }
   console.log("newely user was created", userFromDB)
   res.redirect(`/auth/profile`)
 
@@ -75,81 +75,67 @@ try{
 
 
 
-// router.get("/profile", async (req, res, next) => {
-//   try {
+router.get("/profile", isLoggedIn, async (req, res, next) => {
+  try {
+if(req.session.currentUser){
+const findUserfromDB = await User.findOne({email: req.session.currentUser.email})
+   console.log(findUserfromDB)
 
-// if(req.session.currentUser){
-// const findUserfromDB = await User.findOne({username})
-//    console.log(findUserfromDB)
-//    findUserfromDB.loggedIn =true;
-//    res.redirect('/auth/profile', findUserfromDB)
-// }else{
-//   res.render('auth/register')
-// }
-//   }
-//   catch(err){
-//     console.log('error while rendering profile', err)
-// }
-// });
+   findUserfromDB.loggedIn =true;
+   res.render('auth/profile', findUserfromDB)
+}else{
+  res.render('auth/register')
+}
+  }
+  catch(err){
+    console.log('error while rendering profile', err)
+}
+});
+
 
 // GET /auth/login
 router.get("/login", isLoggedOut, (req, res) => {
-  res.render("auth/login");
+  if(req.session.currentUser){
+    res.render("auth/login");
+  }else{
+    res.render('auth/login')
+  }
+  
 });
 
 // POST /auth/login
-router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, email, password } = req.body;
+router.post("/login", isLoggedOut, async (req, res, next) => {
+  try {
+    const { username, email, password } = req.body;
 
-  // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
-    res.status(400).render("auth/login", {
-      errorMessage:
-        "All fields are mandatory. Please provide username, email and password.",
-    });
-    return;
+    if (username === "" || email === "" || password === "") {
+      res.status(400).render("auth/login", {
+        errorMessage:
+          "All fields are mandatory. Please provide username, email and password.",
+      });
+      return;
+    }
+    if (password.length < 6) {
+      return res.status(400).render("auth/login", {
+        errorMessage: "Your password needs to be at least 6 characters long.",
+      });
+    }
+  
+    const user = await User.findOne({ email })
+        if (!user) {
+          res.render("auth/login", { errorMessage: "Wrong credentials." });
+          return;
+        }else if ( bcrypt.compare(password, user.password)){
+          req.session.currentUser = {email};
+          User.loggedIn = true;
+          res.render('auth/profile', user)
+        }else{
+          res.render('auth/login', { errorMessage: "Wrong credentials." })
+        }
   }
+    catch(err) {
 
-  // Here we use the same logic as above
-  // - either length based parameters or we check the strength of a password
-  if (password.length < 6) {
-    return res.status(400).render("auth/login", {
-      errorMessage: "Your password needs to be at least 6 characters long.",
-    });
-  }
-
-  // Search the database for a user with the email submitted in the form
-  User.findOne({ email })
-    .then((user) => {
-      // If the user isn't found, send an error message that user provided wrong credentials
-      if (!user) {
-        res
-          .status(400)
-          .render("auth/login", { errorMessage: "Wrong credentials." });
-        return;
-      }
-
-      // If user is found based on the username, check if the in putted password matches the one saved in the database
-      bcrypt
-        .compare(password, user.password)
-        .then((isSamePassword) => {
-          if (!isSamePassword) {
-            res
-              .status(400)
-              .render("auth/login", { errorMessage: "Wrong credentials." });
-            return;
-          }
-
-          // Add the user object to the session object
-          req.session.currentUser = user.toObject();
-          // Remove the password field
-          delete req.session.currentUser.password;
-
-          res.redirect("/");
-        })
-        .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
-    })
-    .catch((err) => next(err));
+    } 
 });
 
 // GET /auth/logout

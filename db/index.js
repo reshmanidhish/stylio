@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
 const MONGO_URI =
-  process.env.MONGODB_URI || `mongodb+srv://${process.env.STYLIO_DB_USERNAME}:${process.env.STYLIO_DB_PASSWORD}@stylio.qqrx8ll.mongodb.net/stylio`;
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/stylio";
 
 mongoose
   .connect(MONGO_URI)

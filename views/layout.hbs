@@ -49,7 +49,7 @@
           <div class="col-lg-6">
             <div class="header-contact">
               <ul>
-                <li>Welcome to Our store Multikart</li>
+                <li>Welcome to Our store Stylio</li>
                 <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 123 - 456 - 7890</li>
               </ul>
             </div>
@@ -61,12 +61,17 @@
               <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
                 My Account
                 <ul class="onhover-show-div">
-                  {{#if isLoggedIn}}
-                    <li><a href="/auth/login">Logout</a></li>
+                {{#if loggedIn}}
+                    <li><a href="/auth/profile">Profile</a></li>
+                    <li>
+                      <form action="auth/logout" method="post">
+                     <a href="/auth/logout">Logout</a>
+                      </form>
+                    </li>
                   {{else}}
                     <li><a href="/auth/login">Login</a></li>
-                    <li><a href="/auth/signup">Register</a></li>
-                  {{/if}}
+                    <li><a href="/auth/register">Register</a></li>
+                    {{/if}}
                 </ul>
               </li>
             </ul>
@@ -87,13 +92,13 @@
                 </a>
               </div>
               <div class="brand-logo">
-                <a href="index.html"><img src="/assets/images/logos/stylio.png" class="img-fluid blur-up lazyload"
+                <a href="/"><img src="/assets/images/logos/stylio.png" class="img-fluid blur-up lazyload"
                     alt=""></a>
               </div>
             </div>
             <div>
               <form class="form_search" role="form" action="/auth/search" method="get"> 
-                <input id="query search-autocomplete" type="text" name="surname" placeholder="Search any home decor items..."
+                <input id="query search-autocomplete" type="text" name="surname" placeholder="Search by Product, Brand or Cat "
                   class="nav-search nav-search-field" aria-expanded="true">
                 <button type="submit" class="btn-search">
                   <i class="ti-search"></i>
@@ -135,11 +140,11 @@
                           class="ti-settings"></i></div>
 
 
-                      <div class="show-div setting">
+                      <div class="show-div setting" id="javalan">
                         <h6>language</h6>
                         <ul>
-                          <li><a href="#">english</a></li>
-                          <li><a href="#">french</a></li>
+                          <li><a href="#Weglot-en">english</a></li>
+                          <li><a href="#Weglot-fr">french</a></li>
                         </ul>
                         <h6>currency</h6>
                         <ul class="list-inline">
@@ -205,7 +210,7 @@
             <div class="category-menu d-none d-xl-block h-100">
               <div id="toggle-sidebar" class="toggle-sidebar">
                 <i class="fa fa-bars sidebar-bar"></i>
-                <h5 class="mb-0">shop by category</h5>
+                <h5 class="mb-0">shop by Category</h5>
               </div>
             </div>
             <div class="sidenav fixed-sidebar marketplace-sidebar svg-icon-menu">
@@ -273,11 +278,12 @@
               <div class="subscribe">
                 <div>
                   <h4>KNOW IT ALL FIRST!</h4>
-                  <p>Never Miss Anything From Multikart By Signing Up To Our Newsletter.</p>
+                  <p>Never Miss Anything From Stylio By Signing Up To Our Newsletter.</p>
                 </div>
               </div>
             </div>
             <div class="col-lg-6">
+              {{!-- create a get router for subcribers  --}}
               <form
                 action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda"
                 class="form-inline subscribe-form auth-form needs-validation" method="post"
@@ -301,8 +307,11 @@
               <h4>about</h4>
             </div>
             <div class="footer-contant">
-              <div class="footer-logo"><img src="/assets/images/icon/logo/1.png" alt=""></div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                <div class="brand-logo" style="float:left; margin: 0px;">
+                <a href="/"><img src="/assets/images/logos/stylio.png" class="img-fluid blur-up lazyload"
+                    alt=""></a>
+              </div>
+              <p style="word-break:break-all; padding-bottom: 1rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                 ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
               <div class="footer-social">
                 <ul>
@@ -318,7 +327,7 @@
           <div class="col offset-xl-1">
             <div class="sub-title">
               <div class="footer-title">
-                <h4>my account</h4>
+                <h4><a style="color: rgb(51, 50, 50);" href="/auth/profile">my account</a></h4>
               </div>
               <div class="footer-contant">
                 <ul>
@@ -564,6 +573,9 @@
     function closeSearch() {
       document.getElementById("search-overlay").style.display = "none";
     }
+
+
+    
   </script>
 
 </body>

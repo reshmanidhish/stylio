@@ -1,48 +1,3 @@
-{{!-- <section class="p-0">
-  <div id="login-form">
-    <h2>Log In</h2>
-    <form action="/auth/login" method="POST">
-
-      <label> Username
-        <input type="text" name="username" placeholder="Your username" />
-      </label>
-
-      <label> Email
-        <input type="email" name="email" placeholder="Your email" />
-      </label>
-
-      <label> Password
-        <input type="password" name="password" placeholder="Your password" />
-      </label>
-
-      <button type="submit">Log In</button>
-
-
-      {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
-      {{/if}}
-    </form>
-  </div>
-</section> --}}
- <div class="breadcrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="page-title">
-                        <h2>customer's login</h2>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <nav aria-label="breadcrumb" class="theme-breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active">Login</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
 
 <section class="login-page section-b-space">
   <form action="/auth/login" method="POST">
@@ -70,7 +25,7 @@
           <div class="theme-card authentication-right">
             <h6 class="title-font">Create A Account</h6>
             <p>Sign up for a free account at our store. Registration is quick and easy. It allows you to be
-              able to order from our shop. To start shopping click register.</p><a href="#" class="btn btn-solid">Create
+              able to order from our shop. To start shopping click register.</p><a href="/auth/register" class="btn btn-solid">Create
               an Account</a>
           </div>
         </div>

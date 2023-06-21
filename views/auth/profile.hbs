@@ -1,11 +1,8 @@
-{{#if username}}
-  <h2>Welcome, {{username}}!</h2>
-  <p>This is your profile page my friend!<br>{{emil}}</p>
-  <button>
-    <a href="/">home</a>
-  </button>
-  <img src="../images/logo.png" alt="samo image" style="width: 30rem; height:auto;">
-
+<div>
+{{#if email}}
+  <h2>Welcome, {{firstName}} !</h2>
+  <img src="../assets/images/profile/user.png" alt="profile image" style="width: 18rem; height:auto;">
 {{else}}
   <p>Still no logged in user, sorry!</p>
 {{/if}}
+</div>
