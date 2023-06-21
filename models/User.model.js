@@ -22,28 +22,28 @@ const userSchema = new Schema(
 
     user_type: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
     },
 
     shipping_address: {
       type: String,
-      required: true,
+      // required: true,
     },
 
     mobile_number: {
       type: Number,
-      required: true,
+      // required: true,
     },
 
     state: {
       type: String,
-      required: true,
+      // required: true,
     },
 
     country: {
       type: String,
-      required: true,
+      // required: true,
     },
 
     created_date: {
