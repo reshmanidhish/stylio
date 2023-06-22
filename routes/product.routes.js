@@ -13,7 +13,7 @@ router.get('/create',  (req, res, nex)=> {
 
 
 router.post('/create',  (req, res, nex)=> {
-//const {prouctName,productCategory,productImages,productPrice,productQuantity,color,productBrand}
+//const {prouctName,productCategory,productImages,productPrice,quantity,color,productBrand,}=req.body
 });
 
 
