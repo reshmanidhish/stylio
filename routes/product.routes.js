@@ -5,23 +5,15 @@ const Category = require("../models/Category.model");
 
 
 
-router.get('/product', async (req, res, nex)=> {
-    try{
+router.get('/create',  (req, res, nex)=> {
+   res.render("create-product")
 
-    }
-catch(err){
-    console.log('  ',err)
-}
+
 });
 
 
-router.post('/product', async (req, res, nex)=> {
-    try{
-
-    }
-catch(err){
-    console.log(' error ',err)
-}
+router.post('/create',  (req, res, nex)=> {
+//const {prouctName,productCategory,productImages,productPrice,productQuantity,color,productBrand}
 });
 
 
