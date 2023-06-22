@@ -5,8 +5,9 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 const User = require("../models/User.model");
 
+
 /* GET home page */
-router.get("/", async (req, res, next) => {
+router.get("/", isLoggedIn, async (req, res, next) => {
   try {
     if(req.session.currentUser){
       const currentuserDB = await User.findOne({email: req.session.currentUser.email})
