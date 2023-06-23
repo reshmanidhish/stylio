@@ -128,7 +128,7 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
         }else if ( bcrypt.compare(password, user.password)){
           req.session.currentUser = {email};
           User.loggedIn = true;
-          res.render('index', user)
+          res.render('auth/profile', user)
         }else{
           res.render('auth/login', { errorMessage: "Wrong credentials." })
         }
@@ -153,22 +153,6 @@ router.get("/logout", isLoggedIn, (req, res) => {
 
 
 
-
-router.get('/search', isLoggedOut, async (req, res, nex)=> {
-  try{
-if(req.session.currentUser !== ""){
-  const allProductDB = await User.find()
-  console.log(allProductDB)
-  // allProductDB.loggedIn = true;
-  res.render('search', {allProductDB: allProductDB})
-}else{
-  res.render("search")
-}
-  }
-catch(err){
-  console.log('' ,err)
-}
-});
 
 
 module.exports = router;

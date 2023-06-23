@@ -5,15 +5,27 @@ const Category = require("../models/Category.model");
 
 
 
-router.get('/create',  (req, res, nex)=> {
-   res.render("create-product")
-
-
+router.get('/create', async  (req, res, nex)=> {
+    try {
+     const categoryDB = await Category.find()
+        res.render("product/create-product", {categoryDB})
+    }
+  catch(err){
+    console.log('error while looking up category in DB', err)
+  }
 });
 
 
-router.post('/create',  (req, res, nex)=> {
-//const {prouctName,productCategory,productImages,productPrice,quantity,color,productBrand,}=req.body
+router.post('/create', async (req, res, nex)=> {
+    try {
+const {name, description, product_category, dimension, brand_name, price, image_name, material, quantity, care_instructions, discount, created_date, updated_date} = req.body;
+ const creatProductDB = await Product.create({name, description, product_category, dimension, brand_name, price, image_name, material, quantity, care_instructions, discount, created_date, updated_date})
+ console.log(creatProductDB)
+res.redirect('/')
+    }
+    catch(err){
+        console.log('error while posting product in DB', err)
+    }
 });
 
 
@@ -36,5 +48,22 @@ router.post('/create',  (req, res, nex)=> {
 // });
 
 
+
+router.get('/search', async (req, res, nex)=> {
+    try{
+        const {name} =req.params;
+  if(req.session.currentUser !== ""){
+    const allProductDB = await Product.findOne({name})
+    console.log(allProductDB)
+    // allProductDB.loggedIn = true;
+    res.render('search', {allProductDB: allProductDB})
+  }else{
+    res.render("search")
+  }
+    }
+  catch(err){
+    console.log('' ,err)
+  }
+  });
 
 module.exports = router;
