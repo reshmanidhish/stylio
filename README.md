@@ -19,10 +19,10 @@ Stylio is an ecommerce platform for home decor, built using Node.js, Express.js,
 - **Adyen**: A leading payment gateway provider for secure online transactions.
 
 ## Workflow
-[![N|Solid](https://raw.githubusercontent.com/reshmanidhish/diagrams/main/stylio/stylio_flowchart.png)](https://nodesource.com/products/nsolid)
+[![N|Solid](https://raw.githubusercontent.com/reshmanidhish/diagrams/main/stylio/stylio_flowchart.png)](https://raw.githubusercontent.com/reshmanidhish/diagrams/main/stylio/stylio_flowchart.png)
 
 ## Data Model Structure
-[![N|Solid](https://raw.githubusercontent.com/reshmanidhish/diagrams/main/home-decor-schema-model.drawio.png)](https://nodesource.com/products/nsolid)
+[![N|Solid](https://raw.githubusercontent.com/reshmanidhish/diagrams/main/home-decor-schema-model.drawio.png)](https://raw.githubusercontent.com/reshmanidhish/diagrams/main/home-decor-schema-model.drawio.png)
 
 ## Installation
 
