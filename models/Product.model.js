@@ -33,6 +33,11 @@ const productSchema = new Schema(
       type: String,
     },
 
+    image_path: {
+      type: String,
+      // required: true,
+    },
+
     material: {
       type: String,
       required: true,
