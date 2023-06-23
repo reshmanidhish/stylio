@@ -16,6 +16,7 @@ router.get('/create', async  (req, res, nex)=> {
 });
 
 
+
 router.post('/create', async (req, res, next)=> {
     try {
 const {name, description, product_category, dimension, brand_name, price,image, material, quantity, care_instructions, discount, created_date, updated_date} = req.body;
@@ -27,7 +28,6 @@ res.redirect('/' )
         console.log('error while posting product in DB', err)
     }
 });
-
 
 
 
