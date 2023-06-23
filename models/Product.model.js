@@ -10,9 +10,6 @@ const productSchema = new Schema(
 
     description: {
       type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
     },
 
     product_category: [{
@@ -30,16 +27,10 @@ const productSchema = new Schema(
 
    price: {
       type: Number,
-      required: true,
     },
 
-   image_name: {
+   images: {
       type: String,
-    },
-
-    image_path: {
-      type: String,
-      required: true,
     },
 
     material: {
@@ -49,7 +40,6 @@ const productSchema = new Schema(
 
     color: {
       type: String,
-      required: true,
     },
     quantity: {
         type: Number,

@@ -8,7 +8,7 @@ const Category = require("../models/Category.model");
 router.get('/create', async  (req, res, nex)=> {
     try {
      const categoryDB = await Category.find()
-        res.render("product/create-product", {categoryDB})
+        res.render("product/create", {categoryDB})
     }
   catch(err){
     console.log('error while looking up category in DB', err)
@@ -16,12 +16,12 @@ router.get('/create', async  (req, res, nex)=> {
 });
 
 
-router.post('/create', async (req, res, nex)=> {
+router.post('/create', async (req, res, next)=> {
     try {
-const {name, description, product_category, dimension, brand_name, price, image_name, material, quantity, care_instructions, discount, created_date, updated_date} = req.body;
- const creatProductDB = await Product.create({name, description, product_category, dimension, brand_name, price, image_name, material, quantity, care_instructions, discount, created_date, updated_date})
+const {name, description, product_category, dimension, brand_name, price,image, material, quantity, care_instructions, discount, created_date, updated_date} = req.body;
+ const creatProductDB = await Product.create({name, description, product_category, dimension, brand_name, price,image, material, quantity, care_instructions, discount, created_date, updated_date})
  console.log(creatProductDB)
-res.redirect('/')
+res.redirect('/' )
     }
     catch(err){
         console.log('error while posting product in DB', err)
