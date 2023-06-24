@@ -18,114 +18,131 @@
   </div>
 </div>
 
-<section class="product-page section-b-space">
+<section class="register-page section-b-space">
   <form action="/product/create" method="POST">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="theme-card">
+      <h3>Product Details</h3>
+      <div class="theme-card">
+        <div class="row pb-2">
+          <div class="col-lg-3">
             <div class="form-group">
               <label for="text">Product Name</label>
-              <input type="text" name="name" class="form-control" id="product-name"
-                placeholder="Enter product name" required="">
+              <input type="text" name="name" class="form-control" id="product-name" placeholder="Enter product name"
+                required="">
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label for="review">Product Price </label>
+              <input type="text" name="price" class="form-control" id="review"
+                placeholder="Enter product price (per quantity)" required="">
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="review">Product Category</label>
+              <select name="product_category" class="form-control">
+                {{#each categoryDB}}
+                <option value="{{this._id}}">{{this.name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="review">Product Dimension</label>
+              <input type="text" name="productPrice" class="form-control" id="review"
+                placeholder="Enter product dimension" required="">
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="text">Product Material</label>
+              <input type="text" name="material" class="form-control" id="product-name" placeholder="Enter product material"
+                required="">
             </div>
           </div>
         </div>
-      
+
+        {{!-- Keeping the missing here --}}
+
+        <div class="row pb-2">
+          
+          
+        </div>
+
+        {{!-- Keeping the missing here --}}
+
+
+
+        <div class="row py-2">
           <div class="col-lg-3">
-          <div class="form-group">
-            <label for="review">Material</label>
-            <input type="text" name="material" class="form-control" id="review"
-              placeholder="material" required="">
+            <div class="form-group">
+              <label for="review">Color</label>
+              <input type="text" name="color" class="form-control" id="product" placeholder="Enter product color"
+                required="">
+            </div>
           </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="form-group">
-            <label for="review">Product Price</label>
-            <input type="text" name="price" class="form-control" id="review"
-              placeholder="Enter product price" required="">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="form-group">
-            <label for="text">Quantity</label>
-            <input type="text" name="quantity" class="form-control" id="product" placeholder="Enter product quantity"
-              required="">
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="form-group">
-            <label for="review">Color</label>
-            <input type="text" name="color" class="form-control" id="product" placeholder="Enter product color"
-              required="">
-          </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="form-group">
-            <label for="text">Product Brand</label>
-            <input type="text" name="brand_name" class="form-control" id="product"
-              placeholder="Enter product Brand" required="">
-          </div>
-        </div>
-      
-        {{!-- <div class="col-lg-3"> --}}
           <div class="col-lg-3 select_input">
-            <label for="review">Product Image</label>
-            <input type="file" name="image" class="form-control" id="product"
-              placeholder="Enter product Image" required="">
+            <div class="form-group">
+              <label for="review">Product Image</label>
+              <input type="file" name="image" class="form-control" id="product"
+                placeholder="Select" required="">
+            </div>
           </div>
-
-         <div class="col-lg-3">
-          <div class="form-group">
-            <label for="review">Product Instruction </label>
-            <input type="text" name="care_instructions" class="form-control" id="review"
-              placeholder="Enter product instruction" required="">
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="text">Product Brand</label>
+              <input type="text" name="brand_name" class="form-control" id="product"
+                placeholder="Enter product brand" required="">
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="text">Quantity</label>
+              <input type="text" name="quantity" class="form-control" id="product" placeholder="Enter product quantity"
+                required="">
+            </div>
+          </div>
+          
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="text">Discount</label>
+              <input type="text" name="discount" class="form-control" id="product-name" placeholder="Enter product discount"
+                required="">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 py-2">
+            <div class="form-group">
+              <label for="review">Product Description</label>
+              <textarea class="form-control mb-0" name="description" placeholder="Enter Product Description"
+                id="exampleFormControlTextarea1" rows="6"></textarea>
+            </div>
+          </div>
+        </div>
+         <div class="row">
+          <div class="col-lg-12 py-2">
+            <div class="form-group">
+              <label for="review">Product Care Instructions</label>
+              <textarea class="form-control mb-0" name="care_instructions" placeholder="Enter Product Care Instructions"
+                id="exampleFormControlTextarea1" rows="6"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <button type="submit" class="btn btn-solid">CREATE</button>
+              <button type="submit" class="btn btn-solid w-auto">Reset</button>
+            </div>
           </div>
         </div>
 
-           <div class="col-lg-3">
-          <div class="form-group">
-            <label for="review">Discount</label>
-            <input type="text" name="discount" class="form-control" id="review"
-              placeholder="Enter product discount price" required="">
-          </div>
-        </div>
-      </div>
-         
-      
- <div class="col-lg-3">
-          <div class="form-group">
-            <label for="">Product Category</label>
-            <select name="product_category">
-              {{#each categoryDB}}
-            <option value="{{this._id}}">{{this.name}}</option>
-            {{/each}}
-            </select>
-          </div>
-        </div>
 
-
-          <div class="col-lg-12">
-            <label for="review">Product Description</label>
-            <textarea class="form-control mb-0" name="description" placeholder="Enter Product Description" id="exampleFormControlTextarea1"
-              rows="6"></textarea>
-          </div>
-        </div>
       </div>
     </div>
-
-       
-      <div style="display:flex; justify-content:space-evenly;margin-top: 2rem; ">
-<button type="submit"  class="btn btn-solid w-auto">Create</button>
-<button type="submit"  class="btn btn-solid w-auto">Reset</button>
-      </div>
-       
-  </form>
-  </div>
-  </div>
+    </div>
   </form>
 </section>
