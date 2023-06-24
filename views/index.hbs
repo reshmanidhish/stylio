@@ -1,2 +1,43 @@
-<h1>{{appTitle}} 🚀</h1>
-<p>Welcome Ironhacker!</p>
+  <!-- Home slider -->
+  <section class="p-0">
+    <div class="slide-1 home-slider">
+      <div>
+        <div class="home">
+          <img src="assets/images/furniture/banner/1.jpg" alt="" class="bg-img blur-up lazyload">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="slider-contain">
+                  <div>
+                    <h4>for kids</h4>
+                    <h1>spring collection</h1><a href="#" class="btn btn-solid">shop now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        {{#each allProductDB}}
+        {{this.name}}
+        {{/each}}
+        <div class="home text-center">
+          <img src="assets/images/home-banner/22.jpg" alt="" class="bg-img blur-up lazyload">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="slider-contain">
+                  <div>
+                    <h4>30% off</h4>
+                    <h1>lowest price</h1><a href="#" class="btn btn-solid">shop now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Home slider end -->

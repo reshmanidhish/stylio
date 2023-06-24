@@ -47,19 +47,19 @@ module.exports = (app) => {
   app.use(express.static(path.join(__dirname, "..", "public")));
 
   // Handles access to the favicon
-  app.use(
-    favicon(path.join(__dirname, "..", "public", "images", "favicon.ico"))
-  );
+  // app.use(
+  //   favicon(path.join(__dirname, "..", "public", "images", "favicon.ico"))
+  // );
 
   // ℹ️ Middleware that adds a "req.session" information and later to check that you are who you say you are 😅
-  app.use(
-    session({
-      secret: process.env.SESSION_SECRET || "super hyper secret key",
-      resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create({
-        mongoUrl: MONGO_URI,
-      }),
-    })
-  );
-};
+//   app.use(
+//     session({
+//       secret: process.env.SESSION_SECRET || "super hyper secret key",
+//       resave: false,
+//       saveUninitialized: false,
+//       store: MongoStore.create({
+//         mongoUrl: MONGO_URI,
+//       }),
+//     })
+//   );
+ };
