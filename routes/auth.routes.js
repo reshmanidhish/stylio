@@ -51,7 +51,7 @@ try{
 
   const salt = await bcrypt.genSalt(saltRounds)
   const hashedpassword = await bcrypt.hash(password, salt)
-  const userFromDB = await User.create({ email, firstName, lastName , password: hashedpassword})
+  const userFromDB = await User.create({ email, firstName, lastName ,userType: 'customer', password: hashedpassword})
   
   req.session.currentUser = {email, firstName, lastName }
   console.log("newely user was created", userFromDB)
