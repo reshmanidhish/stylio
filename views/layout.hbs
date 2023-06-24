@@ -98,15 +98,20 @@
               </div>
             </div>
             <div>
-              <form class="form_search" role="form" action="/auth/search" method="get"> 
-                <input id="query search-autocomplete" type="text" name="surname" placeholder="Search by Product, Brand or Cat "
+              <form class="form_search" role="form" action="/product/search" method="GET"> 
+                <input id="query search-autocomplete" type="search" name="name" placeholder="Search by Product, Brand or Cat "
                   class="nav-search nav-search-field" aria-expanded="true">
                 <button type="submit" class="btn-search">
                   <i class="ti-search"></i>
                 </button>
-                
               </form>
-          
+              {{!-- {{#if foundProductDB}}
+                {{#each foundProductDB}}
+                <p> Found Product{{name}}</p>
+                {{/each}}
+                {{/if}}
+                
+           --}}
             </div>
             <div class="menu-right pull-right">
               <div>
@@ -221,7 +226,7 @@
                       aria-hidden="true"></i> Back</div>
                 </div>
                 <ul id="sub-menu" class="sm pixelstrap sm-vertical">
-                  <li> <a href="#">Decoration</a>
+                  <li> <a href="/auth/partials/categorypartials">Belt</a>
                   </li>
                   <li> <a href="#">Carpets</a>
                     
