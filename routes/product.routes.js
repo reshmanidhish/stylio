@@ -31,39 +31,28 @@ res.redirect('/' )
 
 
 
-// router.get('/search', async (req, res, nex)=> {
-//     try{
-//   if(req.session.currentUser !== ""){
-//     const allProductDB = await Product.findOne({name: req.session.currentUser.name})
-//     console.log(allProductDB)
-//     allProductDB.loggedIn = true;
-//     res.render('/form_search', allProductDB)
-//   }else{
-//     res.render("/form_search")
-//   }
-//     }
-// catch(err){
-//     console.log('' ,err)
-// }
-// });
-
-
 
 router.get('/search', async (req, res, nex)=> {
     try{
-        const {name} =req.params;
-  if(req.session.currentUser !== ""){
-    const allProductDB = await Product.findOne({name})
-    console.log(allProductDB)
-    // allProductDB.loggedIn = true;
-    res.render('search', {allProductDB: allProductDB})
-  }else{
-    res.render("search")
-  }
+    const data = await Product.find({name: req.query.name})
+    console.log(data)
+    res.render('product/search', {name: data})
     }
   catch(err){
-    console.log('' ,err)
+    console.log('error while searching' ,err)
   }
   });
+
+
+  router.get("/allproduct/:productId", async (req, res, next)=> {
+    try{
+const foundproductDB = Product.findOne(req.params.productId)
+console.log(foundproductDB)
+res.render("allproduct", {name: foundproductDB.body.name })
+    }
+    catch(err){
+        console.log('while rendering allproduct' ,err)
+    }
+  })
 
 module.exports = router;
