@@ -1,18 +1,584 @@
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>{{appTitle}}</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="multikart">
+  <meta name="keywords" content="multikart">
+  <meta name="author" content="multikart">
+  <link rel="icon" href="/assets/images/logos/stylio.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/images/logos/stylio.png" type="image/x-icon">
+  <title>Stylio -  E-commerce </title>
 
-  <body>
+  <!--Google font-->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
 
-    {{{body}}}
+  <!-- Icons -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/vendors/font-awesome.css">
 
-    <script src="/js/script.js"></script>
-  </body>
+  <!--Slick slider css-->
+  <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick-theme.css">
+
+  <!-- Animate icon -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/vendors/animate.css">
+
+  <!-- Themify icon -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/vendors/themify-icons.css">
+
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/vendors/bootstrap.css">
+
+  <!-- Theme css -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+
+</head>
+
+
+<body class="theme-color-5">
+  <!-- header start -->
+  <header class="header-style-5 style-light">
+    <div class="mobile-fix-option"></div>
+    <div class="top-header top-header-dark2">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="header-contact">
+              <ul>
+                <li>Welcome to Our store Stylio</li>
+                <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 123 - 456 - 7890</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6 text-end">
+            <ul class="header-dropdown">
+              {{#if loggedIn}}
+              <li class="onhover-dropdown mobile-account"><i  class="fa fa-user" aria-hidden="true"></i>
+              Welcome {{firstName}} 
+              <ul class="onhover-show-div">
+                <li><a href="/order/cart">Cart</a></li>
+               <li><form action="auth/logout" method="post">
+                     <a href="/auth/logout">Logout</a>
+                      </form>
+                    </li>
+              </ul>
+              {{else}}
+               <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
+                My Account
+                <ul class="onhover-show-div">
+                    <li><a href="/auth/login">Login</a></li>
+                    <li><a href="/auth/register">Register</a></li>
+                    {{/if}}
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="main-menu">
+            <div class="menu-left">
+              <div class="navbar d-block d-xl-none">
+                <a href="javascript:void(0)">
+                  <div class="bar-style" id="toggle-sidebar-res"><i class="fa fa-bars sidebar-bar"
+                      aria-hidden="true"></i>
+                  </div>
+                </a>
+              </div>
+              <div class="brand-logo">
+                <a href="/"><img src="/assets/images/logos/stylio.png" class="img-fluid blur-up lazyload"
+                    alt=""></a>
+              </div>
+            </div>
+            <div>
+              <form class="form_search" role="form" action="/auth/search" method="get"> 
+                <input id="query search-autocomplete" type="text" name="surname" placeholder="Search by Product, Brand or Cat "
+                  class="nav-search nav-search-field" aria-expanded="true">
+                <button type="submit" class="btn-search">
+                  <i class="ti-search"></i>
+                </button>
+                
+              </form>
+          
+            </div>
+            <div class="menu-right pull-right">
+              <div>
+                <div class="icon-nav">
+                  <ul>
+                    <li class="onhover-div mobile-search d-xl-none d-inline-block">
+                      <div><img src="/assets/images/icon/search.png" onclick="openSearch()"
+                          class="img-fluid blur-up lazyload" alt=""> <i class="ti-search" onclick="openSearch()"></i>
+                      </div>
+                      <div id="search-overlay" class="search-overlay">
+                        <div> <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
+                          <div class="overlay-content">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-xl-12">
+                                  <form>
+                                    <div class="form-group">
+                                      <input type="text" class="form-control" id="exampleInputPassword1"
+                                        placeholder="Search a Product">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="onhover-div mobile-setting">
+                      <div><img src="/assets/images/icon/setting.png" class="img-fluid blur-up lazyload" alt=""> <i
+                          class="ti-settings"></i></div>
+
+
+                      <div class="show-div setting" id="javalan">
+                        <h6>language</h6>
+                        <ul>
+                          <li><a href="#Weglot-en">english</a></li>
+                          <li><a href="#Weglot-fr">french</a></li>
+                        </ul>
+                        <h6>currency</h6>
+                        <ul class="list-inline">
+                          <li><a href="#">euro</a></li>
+                          <li><a href="#">rupees</a></li>
+                          <li><a href="#">pound</a></li>
+                          <li><a href="#">doller</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="onhover-div mobile-cart">
+                      <div><img src="/assets/images/icon/cart.png" class="img-fluid blur-up lazyload" alt=""> <i
+                          class="ti-shopping-cart"></i></div>
+                      <span class="cart_qty_cls">2</span>
+                      <ul class="show-div shopping-cart">
+                        <li>
+                          <div class="media">
+                            <a href="#"><img alt="" class="me-3" src="/assets/images/fashion/product/1.jpg"></a>
+                            <div class="media-body">
+                              <a href="#">
+                                <h4>item name</h4>
+                              </a>
+                              <h4><span>1 x $ 299.00</span></h4>
+                            </div>
+                          </div>
+                          <div class="close-circle"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></div>
+                        </li>
+                        <li>
+                          <div class="media">
+                            <a href="#"><img alt="" class="me-3" src="/assets/images/fashion/product/2.jpg"></a>
+                            <div class="media-body">
+                              <a href="#">
+                                <h4>item name</h4>
+                              </a>
+                              <h4><span>1 x $ 299.00</span></h4>
+                            </div>
+                          </div>
+                          <div class="close-circle"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></div>
+                        </li>
+                        <li>
+                          <div class="total">
+                            <h5>subtotal : <span>$299.00</span></h5>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="buttons"><a href="cart.html" class="view-cart">view
+                              cart</a> <a href="#" class="checkout">checkout</a></div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-part bottom-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-3">
+            <div class="category-menu d-none d-xl-block h-100">
+              <div id="toggle-sidebar" class="toggle-sidebar">
+                <i class="fa fa-bars sidebar-bar"></i>
+                <h5 class="mb-0">shop by Category</h5>
+              </div>
+            </div>
+            <div class="sidenav fixed-sidebar marketplace-sidebar svg-icon-menu">
+              <nav>
+                <div>
+                  <div class="sidebar-back text-start d-xl-none d-block"><i class="fa fa-angle-left pe-2"
+                      aria-hidden="true"></i> Back</div>
+                </div>
+                <ul id="sub-menu" class="sm pixelstrap sm-vertical">
+                  <li> <a href="#">Decoration</a>
+                  </li>
+                  <li> <a href="#">Carpets</a>
+                    
+                  </li>
+                  <li> <a href="#">Linens</a>
+                    
+                  </li>
+                  <li> <a href="#">Bedding</a>
+                  </li>
+                  <li> <a href="#">Pillow</a>
+              </nav>
+            </div>
+          </div>
+          <div class="col-xl-9">
+            <div class="main-nav-center">
+              <nav id="main-nav" class="text-start">
+                <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+                <ul id="main-menu" class="sm pixelstrap sm-horizontal">
+                  <li>
+                    <div class="mobile-back text-end">Back<i class="fa fa-angle-right ps-2" aria-hidden="true"></i>
+                    </div>
+                  </li>
+                  <li><a href="/">Home</a></li>
+                  <li class="mega" id="hover-cls">
+                    <a href="#">brands</a>
+                    <ul class="mega-menu">
+                      <li>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col mega-box">
+                              <div class="link-section">                   
+                                <div class="menu-content">
+                                  <ul>
+                                    <li><a target="_blank" href="hasta">Hasta
+                                        1</a></li>
+                                    <li><a target="_blank" href="usea">Usea
+                                        2</a></li>
+                                    <li><a target="_blank" href="arket">Arket
+                                        3</a></li>
+                                    <li><a target="_blank" href="jollein">Jollein
+                                        4</a></li>
+                                    <li><a target="_blank" href="pr-home">PR Home
+                                        5</a></li>
+                                  </ul>
+                                </div>   
+  </header>
+{{{body}}}
+  <!-- footer start -->
+  <footer class="footer-light">
+    <div class="light-layout">
+      <div class="container">
+        <section class="small-section border-section border-top-0">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="subscribe">
+                <div>
+                  <h4>KNOW IT ALL FIRST!</h4>
+                  <p>Never Miss Anything From Stylio By Signing Up To Our Newsletter.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              {{!-- create a get router for subcribers  --}}
+              <form
+                action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda"
+                class="form-inline subscribe-form auth-form needs-validation" method="post"
+                id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
+                <div class="form-group mx-sm-3">
+                  <input type="text" class="form-control" name="EMAIL" id="mce-EMAIL" placeholder="Enter your email"
+                    required="required">
+                </div>
+                <button type="submit" class="btn btn-solid" id="mc-submit">subscribe</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <section class="section-b-space light-layout">
+      <div class="container">
+        <div class="row footer-theme partition-f">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-title footer-mobile-title">
+              <h4>about</h4>
+            </div>
+            <div class="footer-contant">
+                <div class="brand-logo" style="float:left; margin: 0px;">
+                <a href="/"><img src="/assets/images/logos/stylio.png" class="img-fluid blur-up lazyload"
+                    alt=""></a>
+              </div>
+              <p style="word-break:break-all; padding-bottom: 1rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+              <div class="footer-social">
+                <ul>
+                  <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                  <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                  <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col offset-xl-1">
+            <div class="sub-title">
+              <div class="footer-title">
+                <h4><a style="color: rgb(51, 50, 50);" href="/auth/profile">my account</a></h4>
+              </div>
+              <div class="footer-contant">
+                <ul>
+                  <li><a href="#">mens</a></li>
+                  <li><a href="#">womens</a></li>
+                  <li><a href="#">clothing</a></li>
+                  <li><a href="#">accessories</a></li>
+                  <li><a href="#">featured</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="sub-title">
+              <div class="footer-title">
+                <h4>why we choose</h4>
+              </div>
+              <div class="footer-contant">
+                <ul>
+                  <li><a href="#">shipping & return</a></li>
+                  <li><a href="#">secure shopping</a></li>
+                  <li><a href="#">gallary</a></li>
+                  <li><a href="#">affiliates</a></li>
+                  <li><a href="#">contacts</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="sub-title">
+              <div class="footer-title">
+                <h4>store information</h4>
+              </div>
+              <div class="footer-contant">
+                <ul class="contact-list">
+                  <li><i class="fa fa-map-marker"></i>Multikart Demo Store, Demo store India
+                    345-659</li>
+                  <li><i class="fa fa-phone"></i>Call Us: 123-456-7898</li>
+                  <li><i class="fa fa-envelope"></i>Email Us: Support@Multikart.com</li>
+                  <li><i class="fa fa-fax"></i>Fax: 123456</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="sub-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-6 col-md-6 col-sm-12">
+            <div class="footer-end">
+              <p><i class="fa fa-copyright" aria-hidden="true"></i> 2023-24 themeforest powered by
+                pixelstrap</p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-md-6 col-sm-12">
+            <div class="payment-card-bottom">
+              <ul>
+                <li>
+                  <a href="#"><img src="/assets/images/icon/visa.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/assets/images/icon/mastercard.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/assets/images/icon/paypal.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/assets/images/icon/american-express.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="#"><img src="/assets/images/icon/discover.png" alt=""></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="modal fade bd-example-modal-lg theme-modal cart-modal" id="addtocart" tabindex="-1" role="dialog"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body modal1">
+          <div class="container-fluid p-0">
+            <div class="row">
+              <div class="col-12">
+                <div class="modal-bg addtocart">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <div class="media">
+                    <a href="#">
+                      <img class="img-fluid blur-up lazyload pro-img" src="/assets/images/fashion/product/43.jpg" alt="">
+                    </a>
+                    <div class="media-body align-self-center text-center">
+                      <a href="#">
+                        <h6>
+                          <i class="fa fa-check"></i>Item
+                          <span>men full sleeves</span>
+                          <span> successfully added to your Cart</span>
+                        </h6>
+                      </a>
+                      <div class="buttons">
+                        <a href="#" class="view-cart btn btn-solid">Your cart</a>
+                        <a href="#" class="checkout btn btn-solid">Check out</a>
+                        <a href="#" class="continue btn btn-solid">Continue shopping</a>
+                      </div>
+
+                      <div class="upsell_payment">
+                        <img src="/assets/images/payment_cart.png" class="img-fluid blur-up lazyload" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-section">
+                    <div class="col-12 product-upsell text-center">
+                      <h4>Customers who bought this item also.</h4>
+                    </div>
+                    <div class="row" id="upsell_product">
+                      <div class="product-box col-sm-3 col-6">
+                        <div class="img-wrapper">
+                          <div class="front">
+                            <a href="#">
+                              <img src="/assets/images/fashion/product/1.jpg" class="img-fluid blur-up lazyload mb-1"
+                                alt="cotton top">
+                            </a>
+                          </div>
+                          <div class="product-detail">
+                            <h6><a href="#"><span>cotton top</span></a></h6>
+                            <h4><span>$25</span></h4>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-box col-sm-3 col-6">
+                        <div class="img-wrapper">
+                          <div class="front">
+                            <a href="#">
+                              <img src="/assets/images/fashion/product/34.jpg" class="img-fluid blur-up lazyload mb-1"
+                                alt="cotton top">
+                            </a>
+                          </div>
+                          <div class="product-detail">
+                            <h6><a href="#"><span>cotton top</span></a></h6>
+                            <h4><span>$25</span></h4>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-box col-sm-3 col-6">
+                        <div class="img-wrapper">
+                          <div class="front">
+                            <a href="#">
+                              <img src="/assets/images/fashion/product/13.jpg" class="img-fluid blur-up lazyload mb-1"
+                                alt="cotton top">
+                            </a>
+                          </div>
+                          <div class="product-detail">
+                            <h6><a href="#"><span>cotton top</span></a></h6>
+                            <h4><span>$25</span></h4>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-box col-sm-3 col-6">
+                        <div class="img-wrapper">
+                          <div class="front">
+                            <a href="#">
+                              <img src="/assets/images/fashion/product/19.jpg" class="img-fluid blur-up lazyload mb-1"
+                                alt="cotton top">
+                            </a>
+                          </div>
+                          <div class="product-detail">
+                            <h6><a href="#"><span>cotton top</span></a></h6>
+                            <h4><span>$25</span></h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add to cart modal popup end-->
+
+
+  <!-- tap to top start -->
+  <div class="tap-top">
+    <div><i class="fa fa-angle-double-up"></i></div>
+  </div>
+  <!-- tap to top end -->
+
+
+  
+
+
+  <!-- latest jquery-->
+  <script src="/assets/js/jquery-3.3.1.min.js"></script>
+
+  <!-- menu js-->
+  <script src="/assets/js/menu.js"></script>
+
+  <!-- lazyload js-->
+  <script src="/assets/js/lazysizes.min.js"></script>
+
+  <!-- slick js-->
+  <script src="/assets/js/slick.js"></script>
+
+  <!-- Bootstrap js-->
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+  <!-- feather icon js-->
+  <script src="/assets/js/feather.min.js "></script>
+
+  <!-- Video js-->
+  <script src="/assets/js/jquery.vide.min.js"></script>
+
+  <!-- Bootstrap Notification js-->
+  <script src="/assets/js/bootstrap-notify.min.js"></script>
+
+  <!-- Theme js-->
+  <script src="/assets/js/theme-setting.js"></script>
+  <script src="/assets/js/script.js"></script>
+
+
+  <script>
+    $(window).on('load', function () {
+      setTimeout(function () {
+        $('#exampleModal').modal('show');
+      }, 2500);
+    });
+
+    feather.replace();
+
+    function openSearch() {
+      document.getElementById("search-overlay").style.display = "block";
+    }
+
+    function closeSearch() {
+      document.getElementById("search-overlay").style.display = "none";
+    }
+
+
+    
+  </script>
+
+</body>
 
 </html>

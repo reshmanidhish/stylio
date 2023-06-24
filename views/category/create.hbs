@@ -1,0 +1,52 @@
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-title">
+          <h2>Category</h2>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <nav aria-label="breadcrumb" class="theme-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Login</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="product-page section-b-space">
+  <form action="/category/create" method="POST">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="theme-card">
+            <div class="form-group">
+              <label for="text">Name</label>
+              <input type="text" name="name" class="form-control" id="product-name"
+                placeholder="product name" required="">
+            </div>
+          </div>
+        </div>
+     
+          <div class="col-lg-12">
+            <label for="review"> Description</label>
+            <textarea class="form-control mb-0" name="description" placeholder="Product Description" id="exampleFormControlTextarea1"
+              rows="6"></textarea>
+          </div>
+
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-evenly;margin-top: 2rem; ">
+<button type="submit"  class="btn btn-solid w-auto">Create</button>
+{{!-- <button type="submit"  class="btn btn-solid w-auto">Reset</button> --}}
+      </div>
+       
+  </form>
+  </div>
+  </div>
+  </form>
+</section>
