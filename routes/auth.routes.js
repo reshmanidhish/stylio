@@ -126,9 +126,9 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
           res.render("auth/login", { errorMessage: "Wrong credentials." });
           return;
         }else if ( bcrypt.compare(password, user.password)){
-          req.session.currentUser = {email};
+          req.session.currentUser = {email:email,userType:user.userType};
           User.loggedIn = true;
-          res.render('auth/profile', user)
+          res.redirect('/')
         }else{
           res.render('auth/login', { errorMessage: "Wrong credentials." })
         }

@@ -12,32 +12,29 @@ const productSchema = new Schema(
       type: String,
     },
 
-    product_category: [{
-        type: Schema.Types.ObjectId, ref: "Category" 
-    }],
+    product_category: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
+      },
+    ],
 
-    dimensions: [{
-      type: Object,
-      required: true,
-    }],
+    dimensions: {
+      
+        type: String,
+        
+    },
 
     brand_name: {
       type: String,
     },
 
-   price: {
+    price: {
       type: Number,
     },
-
-   images: {
+    image: {
       type: String,
     },
-
-    image_path: {
-      type: String,
-      // required: true,
-    },
-
     material: {
       type: String,
       required: true,
@@ -47,23 +44,22 @@ const productSchema = new Schema(
       type: String,
     },
     quantity: {
-        type: Number,
+      type: Number,
     },
     care_instructions: {
-        type: String,
+      type: String,
     },
     discount: {
-        type: Number,
+      type: Number,
     },
     created_date: {
-        type: Date,
-    }, 
-    updated_date: {
-        type: Date,
+      type: Date,
     },
-
+    updated_date: {
+      type: Date,
+    },
   },
-  
+
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,

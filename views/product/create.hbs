@@ -19,7 +19,7 @@
 </div>
 
 <section class="register-page section-b-space">
-  <form action="/product/create" method="POST">
+  <form action="/product/create" method="POST" enctype="multipart/form-data">
     <div class="container">
       <h3>Product Details</h3>
       <div class="theme-card">
@@ -86,8 +86,8 @@
           <div class="col-lg-3 select_input">
             <div class="form-group">
               <label for="review">Product Image</label>
-              <input type="file" name="image" class="form-control" id="product"
-                placeholder="Select" required="">
+              <input type="file" name="image" class="form-control" id="product" 
+                placeholder="Select" required=""/>
             </div>
           </div>
           <div class="col-lg-2">

@@ -250,6 +250,16 @@
                     </div>
                   </li>
                   <li><a href="/">Home</a></li>
+{{#ifEquals userType "admin"}}
+                      <li><a href="/category/create">Create Category</a></li>
+                      <li><a href="/product/create">Create Products</a></li>
+                  {{/ifEquals}}
+                  
+
+
+
+
+                  
                   <li class="mega" id="hover-cls">
                     <a href="#">brands</a>
                     <ul class="mega-menu">
