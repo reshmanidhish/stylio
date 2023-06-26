@@ -32,7 +32,7 @@ const productSchema = new Schema(
     price: {
       type: Number,
     },
-    image: {
+    imageURL: {
       type: String,
     },
     material: {

@@ -86,8 +86,8 @@
           <div class="col-lg-3 select_input">
             <div class="form-group">
               <label for="review">Product Image</label>
-              <input type="file" name="image" class="form-control" id="product" 
-                placeholder="Select" required=""/>
+              <input type="file" name="product-image-cover" class="form-control" id="product"
+                placeholder="Select" required="">
             </div>
           </div>
           <div class="col-lg-2">
@@ -134,6 +134,9 @@
         <div class="row">
           <div class="col-lg-3">
             <div class="form-group">
+              {{!-- {{#if status}}
+              <p>{{status}}</p>
+              {{/if}} --}}
               <button type="submit" class="btn btn-solid">CREATE</button>
               <button type="submit" class="btn btn-solid w-auto">Reset</button>
             </div>
