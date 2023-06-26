@@ -56,6 +56,7 @@
           </div>
           <div class="col-lg-6 text-end">
             <ul class="header-dropdown">
+<<<<<<< HEAD
               {{#if currentUser.loggedIn}}
               <li class="onhover-dropdown mobile-account"><i class="fa fa-user" aria-hidden="true"></i>
                 Welcome {{currentUser.firstName}}
@@ -72,6 +73,23 @@
                 </ul>
                 {{else}}
               <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
+=======
+              {{#if loggedIn}}
+              <li class="onhover-dropdown mobile-account"><i  class="fa fa-user" aria-hidden="true"></i>
+              Welcome {{firstName}} 
+              <ul class="onhover-show-div">
+                <li><a href="/order/cart">Cart</a></li>
+               <li><form action="auth/logout" method="post">
+                     <a href="/auth/logout">Logout</a>
+                      </form>
+                    </li>
+                    {{!-- {{#ifEquals userType "admin"}}
+  
+                      {{/ifEquals}} --}}
+              </ul>
+              {{else}}
+               <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
+>>>>>>> fc8e477 (update now)
                 My Account
                 <ul class="onhover-show-div">
                   <li><a href="/auth/login">Login</a></li>
