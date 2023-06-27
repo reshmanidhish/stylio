@@ -6,23 +6,80 @@ const fileUploader = require("../config/cloudinary.config");
 
 router.get("/create", async (req, res, nex) => {
   try {
-    const categoryDB = await Category.find();
-    res.render("product/create", { categoryDB });
+    if (req?.session?.currentUser) {
+      if (req.session.currentUser.userType === "admin") {
+        const categoryDB = await Category.find();
+        res.render("product/create", { categoryDB });
+      } else {
+        res.redirect("/");
+      }
+    } else {
+      res.redirect("/");
+    }
   } catch (err) {
     console.log("error while looking up category in DB", err);
   }
 });
 
-router.post('/create', fileUploader.single('image'), async (req, res, next)=> {
+router.get("/:productId/update", async (req, res, nex) => {
   try {
-    console.log(req.file)
-const {name, description, product_category, dimension, brand_name, price, material, quantity, care_instructions, discount, created_date, updated_date} = req.body;
-const creatProductDB = await Product.create({name, description, product_category, dimension, image:req.file.path, brand_name, price, material, quantity, care_instructions, discount, created_date, updated_date})
-console.log(creatProductDB)
-res.redirect('/' )
+    if (req?.session?.currentUser) {
+      if (req.session.currentUser.userType === "admin") {
+        
+        
+        const productDetails = await Product.findOne({ _id: req.params.productId }); //get the product
+        const  categoryDB = await Category.find(); //get the category
+
+        let product =  {details: productDetails, category: categoryDB}
+        
+        res.render("product/update", { product });
+      } else {
+        res.redirect("/");
+      }
+    } else {
+      res.redirect("/");
+    }
+  } catch (err) {
+    console.log("error while looking up category in DB", err);
   }
-  catch(err){
-      console.log('error while posting product in DB', err)
+});
+
+router.post("/create", fileUploader.single("image"), async (req, res, next) => {
+  try {
+    console.log(req.file);
+    const {
+      name,
+      description,
+      product_category,
+      dimension,
+      brand_name,
+      price,
+      material,
+      quantity,
+      care_instructions,
+      discount,
+      created_date,
+      updated_date,
+    } = req.body;
+    const creatProductDB = await Product.create({
+      name,
+      description,
+      product_category,
+      dimension,
+      image: req.file.path,
+      brand_name,
+      price,
+      material,
+      quantity,
+      care_instructions,
+      discount,
+      created_date,
+      updated_date,
+    });
+    console.log(creatProductDB);
+    res.redirect("/");
+  } catch (err) {
+    console.log("error while posting product in DB", err);
   }
 });
 
@@ -39,20 +96,23 @@ router.get("/search", async (req, res, nex) => {
 
 router.get("/view/:productId", async (req, res, next) => {
   try {
-   const product = await Product.findOne({ _id: req.params.productId });
-   console.log("product=====>{}", product);
-    res.render("product/view",{product});
+    const product = await Product.findOne({ _id: req.params.productId });
+    console.log("product=====>{}", product);
+    res.render("product/view", { product });
   } catch (err) {
     console.log("while rendering allproduct", err);
   }
 });
+router.get("/",async(req,res)=>{
+  try{
+const allProductsDB = await Product.find()
+console.log(allProductsDB)
+res.render("product/allproduct",{allProductsDB})
+  }catch(err){
+    console.log("while rendering allproduct", err); 
+  }
 
-
-
-
-
-
-
+})
 
 // router.get("/allproduct/:productId", async (req, res, next) => {
 //   try {

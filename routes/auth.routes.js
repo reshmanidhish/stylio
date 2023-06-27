@@ -122,16 +122,16 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
     }
   
     const user = await User.findOne({ email })
-        if (!user) {
-          res.render("auth/login", { errorMessage: "Wrong credentials." });
-          return;
-        }else if ( bcrypt.compare(password, user.password)){
-          req.session.currentUser = {email:email,userType:user.userType};
-          User.loggedIn = true;
-          res.redirect('/')
-        }else{
-          res.render('auth/login', { errorMessage: "Wrong credentials." })
-        }
+    if (!user) {
+      res.render("auth/login", { errorMessage: "Wrong credentials." });
+      return;
+    }else if ( bcrypt.compare(password, user.password)){
+      req.session.currentUser = {email:email,userType:user.userType};
+      User.loggedIn = true;
+      res.redirect('/')
+    }else{
+      res.render('auth/login', { errorMessage: "Wrong credentials." })
+    }
   }
     catch(err) {
 
