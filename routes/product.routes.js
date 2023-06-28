@@ -99,6 +99,19 @@ router.get("/search", async (req, res, nex) => {
   }
 });
 
+
+
+// router.get('/product-list', async (req,res , next)=> {
+//   try {
+// const allproduct = Product.find()
+// res.render("product/product-list", allproduct)
+//   }
+//   catch (err) {
+//     console.log("while rendering product-list", err);
+//   }
+// })
+
+
 router.get("/view/:productId", async (req, res, next) => {
   try {
     const product = await Product.findOne({ _id: req.params.productId });
