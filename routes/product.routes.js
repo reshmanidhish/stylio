@@ -3,6 +3,7 @@ const router = express.Router();
 const Product = require("../models/Product.model");
 const Category = require("../models/Category.model");
 const fileUploader = require("../config/cloudinary.config");
+const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/create", async (req, res, nex) => {
   try {
@@ -21,7 +22,11 @@ router.get("/create", async (req, res, nex) => {
   }
 });
 
+<<<<<<< HEAD
 router.get("/:productId/update", async (req, res, nex) => {
+=======
+router.post('/create', fileUploader.single('product-image-cover'), async (req, res, next)=> {
+>>>>>>> 2d964c6 (edit done)
   try {
     if (req?.session?.currentUser) {
       if (req.session.currentUser.userType === "admin") {
@@ -94,13 +99,26 @@ router.get("/search", async (req, res, nex) => {
   }
 });
 
+
+
+// router.get('/product-list', async (req,res , next)=> {
+//   try {
+// const allproduct = Product.find()
+// res.render("product/product-list", allproduct)
+//   }
+//   catch (err) {
+//     console.log("while rendering product-list", err);
+//   }
+// })
+
+
 router.get("/view/:productId", async (req, res, next) => {
   try {
     const product = await Product.findOne({ _id: req.params.productId });
     console.log("product=====>{}", product);
     res.render("product/view", { product });
   } catch (err) {
-    console.log("while rendering allproduct", err);
+    console.log("while rendering view", err);
   }
 });
 router.get("/",async(req,res)=>{
@@ -112,16 +130,44 @@ res.render("product/allproduct",{allProductsDB})
     console.log("while rendering allproduct", err); 
   }
 
+
+router.get('/product/:id/edit', isLoggedIn, async (req, res, next)=> {
+  try {
+   
+  if(req.session.currentUser){
+    const {id} = req.params;
+  const categoryListDB = await Category.find()
+  const productByIdDB = await Product.findById({id: req.session.currentUser.id})
+  productByIdDB.loggedIn= true ;
+  console.log(productByIdDB)
+  res.render('product/edit-product', {productUpdate: productByIdDB, categoryListDB })
+}
+  }
+  catch (err) {
+    console.log("while getting edit page", err);
+  }
+});
+
+
+router.post('/product/:id/edit', isLoggedIn,  async (req, res, next) => {
+try{
+  if(req.session.currentUser){
+    const {id} = req.params;
+    const {name, description, product_category, dimension, brand_name, price, material, quantity, care_instructions, discount, created_date, updated_date} =req.body;
+    const updateProduct = await Product.findByIdAndUpdate(id, {name, description, product_category, dimension, image:req.file.path, brand_name, price, material, quantity, care_instructions, discount, created_date, updated_date})
+    updateProduct.loggedIn =true;
+    console.log(updateProduct)
+    res.redirect('/')
+  }else{
+    res.render('product/create')
+  }
+
+}
+catch (err) {
+  console.log("while", err);
+}
 })
 
-// router.get("/allproduct/:productId", async (req, res, next) => {
-//   try {
-//     const foundproductDB = Product.findOne(req.params.productId);
-//     console.log(foundproductDB);
-//     res.render("allproduct", { name: foundproductDB.body.name });
-//   } catch (err) {
-//     console.log("while rendering allproduct", err);
-//   }
-// });
+
 
 module.exports = router;

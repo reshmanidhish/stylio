@@ -219,27 +219,30 @@
             <div class="category-menu d-none d-xl-block h-100">
               <div id="toggle-sidebar" class="toggle-sidebar">
                 <i class="fa fa-bars sidebar-bar"></i>
+               
                 <h5 class="mb-0">shop by Category</h5>
               </div>
             </div>
             <div class="sidenav fixed-sidebar marketplace-sidebar svg-icon-menu">
               <nav>
+                 
                 <div>
                   <div class="sidebar-back text-start d-xl-none d-block"><i class="fa fa-angle-left pe-2"
                       aria-hidden="true"></i> Back</div>
                 </div>
+              
                 <ul id="sub-menu" class="sm pixelstrap sm-vertical">
-                  <li> <a href="/auth/partials/categorypartials">decoration</a>
-                  </li>
-                  <li> <a href="#">Carpets</a>
-                    
-                  </li>
-                  <li> <a href="#">Linens</a>
+                  
+                  <a href='/view-details/Shoe'><li>SHOE</li></a>
+                 
+                  <li> <a href="/view-details/Living room sofa">Sofa</a>
                     
                   </li>
                   <li> <a href="#">Bedding</a>
                   </li>
-                  <li> <a href="#">Cushion</a>
+                  <li> <a href="#">Pillow</a>
+          
+                  </ul>
               </nav>
             </div>
           </div>
@@ -251,11 +254,13 @@
                   <li>
                     <div class="mobile-back text-end">Back<i class="fa fa-angle-right ps-2" aria-hidden="true"></i>
                     </div>
+                  
                   </li>
                   <li><a href="/">Home</a></li>
 {{#ifEquals userType "admin"}}
                       <li><a href="/category/create">Create Category</a></li>
                       <li><a href="/product/create">Create Products</a></li>
+                         <li><a href="/product/{{product._id}}">Edit</a></li>
                   {{/ifEquals}}
                   
  <li><a href="/product">All Products</a></li>
@@ -264,7 +269,7 @@
 
                   
                   <li class="mega" id="hover-cls">
-                    <a href="#">brands</a>
+                    <a href="/category/view">Brands</a>
                     <ul class="mega-menu">
                       <li>
                         <div class="container">
