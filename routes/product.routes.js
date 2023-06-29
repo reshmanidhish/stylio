@@ -26,13 +26,13 @@ router.post('/create', fileUploader.single('product-image-cover'), async (req, r
   try {
     if (req?.session?.currentUser) {
       if (req.session.currentUser.userType === "admin") {
-        
-        
-        const productDetails = await Product.findOne({ _id: req.params.productId }); //get the product
-        const  categoryDB = await Category.find(); //get the category
+        const productDetails = await Product.findOne({
+          _id: req.params.productId,
+        }); //get the product
+        const categoryDB = await Category.find(); //get the category
 
-        let product =  {details: productDetails, category: categoryDB}
-        
+        let product = { details: productDetails, category: categoryDB };
+
         res.render("product/update", { product });
       } else {
         res.redirect("/");
@@ -47,7 +47,6 @@ router.post('/create', fileUploader.single('product-image-cover'), async (req, r
 
 router.post("/create", fileUploader.single("image"), async (req, res, next) => {
   try {
-    console.log(req.file);
     const {
       name,
       description,
@@ -77,7 +76,6 @@ router.post("/create", fileUploader.single("image"), async (req, res, next) => {
       created_date,
       updated_date,
     });
-    console.log(creatProductDB);
     res.redirect("/");
   } catch (err) {
     console.log("error while posting product in DB", err);
@@ -88,7 +86,6 @@ router.get("/search", async (req, res, nex) => {
   try {
     const searchQuery = { name: { $regex: req.query.name, $options: "i" } }; // using regex for searching case insensitively
     const searchResults = await Product.find(searchQuery);
-    console.log(searchResults);
     res.render("product/search", { searchResults });
   } catch (err) {
     console.log("error while searching", err);
@@ -111,23 +108,26 @@ router.get("/search", async (req, res, nex) => {
 router.get("/view/:productId", async (req, res, next) => {
   try {
     const product = await Product.findOne({ _id: req.params.productId });
-    console.log("product=====>{}", product);
     res.render("product/view", { product });
   } catch (err) {
     console.log("while rendering view", err);
   }
 });
 
-
-router.get("/",async(req,res)=>{
-  try{
-const allProductsDB = await Product.find()
-console.log(allProductsDB)
-res.render("product/allproduct",{allProductsDB})
-  }catch(err){
-    console.log("while rendering allproduct", err); 
+router.get("/", async (req, res) => {
+  try {
+    const { category } = req.query;
+    if (category) {
+      const allProductsDB = await Product.find({product_category: category});
+      res.render("product/allproduct", { allProductsDB });
+    } else {
+      const allProductsDB = await Product.find();
+      res.render("product/allproduct", { allProductsDB });
+    }
+  } catch (err) {
+    console.log("while rendering allproduct", err);
   }
-})
+});
 
 
 

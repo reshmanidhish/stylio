@@ -12,7 +12,6 @@ router.post('/create', async (req,res, next)=> {
     try {
         const {name, description, created_date, updated_date } = req.body;
         const DBcategory = await Category.create({name, description, created_date, updated_date })
-        console.log(DBcategory)
         res.redirect('/')
     }
     catch(err){

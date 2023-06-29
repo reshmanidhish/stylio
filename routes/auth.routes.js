@@ -54,7 +54,6 @@ try{
   const userFromDB = await User.create({ email, firstName, lastName ,userType: 'customer', password: hashedpassword})
   
   req.session.currentUser = {email, firstName, lastName }
-  console.log("newely user was created", userFromDB)
   res.redirect(`/auth/profile`)
 
   }
@@ -79,8 +78,6 @@ router.get("/profile", isLoggedIn, async (req, res, next) => {
   try {
 if(req.session.currentUser){
 const findUserfromDB = await User.findOne({email: req.session.currentUser.email})
-   console.log(findUserfromDB)
-
    findUserfromDB.loggedIn =true;
    res.render('auth/profile', findUserfromDB)
 }else{
