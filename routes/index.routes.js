@@ -23,24 +23,12 @@ router.get("/", async (req, res, next) => {
     console.log('error while rendering index', err)
   }
 });
- 
-
-// router.get('/view-details/catergoryName', async (req, res , next)=> {
-//   try{
-//     const {catergoryName} = req.params;
-//   const allCategoryDB = await Category.find({catergoryName: "Shoe" })
-//   res.render('layout', allCategoryDB)
-//   }
-//   catch(err){
-//     console.log('error while ', err)
-//   }
-// });
 
 
 router.get("/view-details/:catergoryName", async (req, res, next)=> {
   try {
       const {catergoryName} = req.params;
-  const categoryDB = await Category.find({catergoryName: ''})
+  const categoryDB = await Category.find({catergoryName: 'pillow'})
   console.log('category seen',categoryDB)
  res.render('category/view-details', { categoryDB })
 
@@ -48,7 +36,7 @@ router.get("/view-details/:catergoryName", async (req, res, next)=> {
   catch(err){
       console.log('error while looking up category  view by id in DB', err)
     }
-})
+});
 
 router.get("/view-details/:catergoryName", async (req, res, next)=> {
   try {
