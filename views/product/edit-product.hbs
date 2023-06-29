@@ -19,7 +19,7 @@
 </div>
 
 <section class="register-page section-b-space">
-  <form action="/product/{{productUpdate._id}}/edit" method="POST" enctype="multipart/form-data">
+  <form action="/product/{{productByIdDB._id}}/edit" method="POST" enctype="multipart/form-data">
     <div class="container">
       <h3>Product Details</h3>
       <div class="theme-card">
@@ -27,7 +27,7 @@
           <div class="col-lg-3">
             <div class="form-group">
               <label for="text">Product Name</label>
-              <input type="text" name="name" class="form-control" id="product-name" value="{{productUpdate.name}}"
+              <input type="text" name="name" class="form-control" id="product-name" value="{{productByIdDB.name}}"
                 required="">
             </div>
           </div>
@@ -35,7 +35,7 @@
             <div class="form-group">
               <label for="review">Product Price </label>
               <input type="text" name="price" class="form-control" id="review"
-                value="{{productUpdate.price}}" required="">
+                value="{{productByIdDB.price}}" required="">
             </div>
           </div>
           <div class="col-lg-2">
@@ -52,13 +52,13 @@
             <div class="form-group">
               <label for="review">Product Dimension</label>
               <input type="text" name="dimension" class="form-control" id="review"
-                value="{{productUpdate.dimension}}" required="">
+                value="{{productByIdDB.dimension}}" required="">
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label for="text">Product Material</label>
-              <input type="text" name="material" class="form-control" id="product-name" value="{{productUpdate.material}}"
+              <input type="text" name="material" class="form-control" id="product-name" value="{{productByIdDB.material}}"
                 required="">
             </div>
           </div>
@@ -79,7 +79,7 @@
           <div class="col-lg-3">
             <div class="form-group">
               <label for="review">Color</label>
-              <input type="text" name="color" class="form-control" id="product" value="{{productUpdate.color}}"
+              <input type="text" name="color" class="form-control" id="product" value="{{productByIdDB.color}}"
                 required="">
             </div>
           </div>
@@ -87,20 +87,20 @@
             <div class="form-group">
               <label for="review">Product Image</label>
               <input type="file" name="product-image-cover" class="form-control" id="product"
-                value="{{productUpdate.image}}" required="">
+                value="{{productByIdDB.image}}" required="">
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label for="text">Product Brand</label>
               <input type="text" name="brand_name" class="form-control" id="product"
-                value="{{productUpdate.brand_name}}" required="">
+                value="{{productByIdDB.brand_name}}" required="">
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label for="text">Quantity</label>
-              <input type="text" name="quantity" class="form-control" id="product" value="{{productUpdate.quantity}}"
+              <input type="text" name="quantity" class="form-control" id="product" value="{{productByIdDB.quantity}}"
                 required="">
             </div>
           </div>
@@ -108,7 +108,7 @@
           <div class="col-lg-2">
             <div class="form-group">
               <label for="text">Discount</label>
-              <input type="text" name="discount" class="form-control" id="product-name" value="{{productUpdate.discount}}"
+              <input type="text" name="discount" class="form-control" id="product-name" value="{{productByIdDB.discount}}"
                 required="">
             </div>
           </div>
@@ -117,8 +117,8 @@
           <div class="col-lg-12 py-2">
             <div class="form-group">
               <label for="review">Product Description</label>
-              <textarea class="form-control mb-0" name="description" value="{{productUpdate.description}}"
-                id="exampleFormControlTextarea1" rows="6"></textarea>
+              <textarea class="form-control mb-0" name="description" 
+                id="exampleFormControlTextarea1" rows="6">{{productByIdDB.description}}</textarea> 
             </div>
           </div>
         </div>
@@ -126,8 +126,8 @@
           <div class="col-lg-12 py-2">
             <div class="form-group">
               <label for="review">Product Care Instructions</label>
-              <textarea class="form-control mb-0" name="care_instructions" value="{{productUpdate.care_instructions}}"
-                id="exampleFormControlTextarea1" rows="6"></textarea>
+              <textarea class="form-control mb-0" name="care_instructions" 
+                id="exampleFormControlTextarea1" rows="6">{{productByIdDB.care_instructions}}</textarea>
             </div>
           </div>
         </div>

@@ -22,11 +22,7 @@ router.get("/create", async (req, res, nex) => {
   }
 });
 
-<<<<<<< HEAD
-router.get("/:productId/update", async (req, res, nex) => {
-=======
 router.post('/create', fileUploader.single('product-image-cover'), async (req, res, next)=> {
->>>>>>> 2d964c6 (edit done)
   try {
     if (req?.session?.currentUser) {
       if (req.session.currentUser.userType === "admin") {
@@ -121,6 +117,8 @@ router.get("/view/:productId", async (req, res, next) => {
     console.log("while rendering view", err);
   }
 });
+
+
 router.get("/",async(req,res)=>{
   try{
 const allProductsDB = await Product.find()
@@ -129,27 +127,27 @@ res.render("product/allproduct",{allProductsDB})
   }catch(err){
     console.log("while rendering allproduct", err); 
   }
+})
 
 
-router.get('/product/:id/edit', isLoggedIn, async (req, res, next)=> {
+
+
+router.get('/:id/edit', async (req, res, next)=> {
   try {
-   
-  if(req.session.currentUser){
-    const {id} = req.params;
-  const categoryListDB = await Category.find()
-  const productByIdDB = await Product.findById({id: req.session.currentUser.id})
-  productByIdDB.loggedIn= true ;
-  console.log(productByIdDB)
-  res.render('product/edit-product', {productUpdate: productByIdDB, categoryListDB })
+   let categoryListDB = await  Category.find()
+  const productByIdDB = await Product.findById(req.params.id)
+  .populate('product_category')
+  console.log('error while getting edit product ',productByIdDB)
+  res.render('product/edit-product', { productByIdDB, categoryListDB })
+
 }
-  }
   catch (err) {
     console.log("while getting edit page", err);
   }
 });
 
 
-router.post('/product/:id/edit', isLoggedIn,  async (req, res, next) => {
+router.post('/:id/edit', isLoggedIn,  async (req, res, next) => {
 try{
   if(req.session.currentUser){
     const {id} = req.params;
@@ -157,7 +155,7 @@ try{
     const updateProduct = await Product.findByIdAndUpdate(id, {name, description, product_category, dimension, image:req.file.path, brand_name, price, material, quantity, care_instructions, discount, created_date, updated_date})
     updateProduct.loggedIn =true;
     console.log(updateProduct)
-    res.redirect('/')
+    res.redirect('/allproduct')
   }else{
     res.render('product/create')
   }
@@ -166,8 +164,41 @@ try{
 catch (err) {
   console.log("while", err);
 }
+});
+
+
+
+router.get("/:id/delete", async (req, res, next)=> {
+  try{
+    const {id}= req.params;
+  res.render('product/delete', {id})
+  }
+  catch (err) {
+    console.log("while", err);
+  }
+});
+
+
+
+router.post("/:id/delete", async (req,res) => {
+  try {
+const deleteProduct = await Product.findByIdAndRemove(req.params.id)
+console.log("deleted", deleteProduct)
+res.redirect('/product')
+
+  }
+  catch (err) {
+    console.log("", err);
+  }
 })
 
 
+router.get('view', async (req,res, next)=> {
+  try {
+  }
+  catch (err) {
+    console.log("", err);
+  }
+})
 
 module.exports = router;
