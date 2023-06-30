@@ -1,3 +1,146 @@
+<!-- Start of Header -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="main-menu">
+        <div class="menu-left">
+          <div class="navbar d-block d-xl-none">
+            <a href="javascript:void(0)">
+              <div class="bar-style" id="toggle-sidebar-res"><i class="fa fa-bars sidebar-bar" aria-hidden="true"></i>
+              </div>
+            </a>
+          </div>
+          <div class="brand-logo">
+            <a href="/"><img src="/assets/images/logos/stylio.png" class="img-fluid blur-up lazyload" alt=""></a>
+          </div>
+        </div>
+        <div>
+          <form class="form_search" role="form" action="/product/search" method="GET">
+            <input id="query search-autocomplete" type="search" name="name"
+              placeholder="Search by Product, Brand or Cat " class="nav-search nav-search-field" aria-expanded="true">
+            <button type="submit" class="btn-search">
+              <i class="ti-search"></i>
+            </button>
+          </form>
+        </div>
+        <div class="menu-right pull-right">
+          <div>
+            <div class="icon-nav">
+              <ul>
+                <li class="onhover-div mobile-search d-xl-none d-inline-block">
+                  <div><img src="/assets/images/icon/search.png" onclick="openSearch()"
+                      class="img-fluid blur-up lazyload" alt=""> <i class="ti-search" onclick="openSearch()"></i>
+                  </div>
+                  <div id="search-overlay" class="search-overlay">
+                    <div> <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
+                      <div class="overlay-content">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-xl-12">
+                              <form>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Search a Product">
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="onhover-div mobile-cart">
+                  <div><img src="/assets/images/icon/cart.png" class="img-fluid blur-up lazyload" alt=""> <i
+                      class="ti-shopping-cart"></i></div>
+                  <span class="cart_qty_cls">{{cartItems.length}}</span>
+                  <ul class="show-div shopping-cart">
+                    {{#each cartItems}}
+                    <li>
+                      <div class="media">
+                        <a href="#"><img alt="" class="me-3" src="{{image}}"></a>
+                        <div class="media-body">
+                          <a href="#">
+                            <h4>{{name}}</h4>
+                          </a>
+                          <h4><span>{{price}}</span></h4>
+                        </div>
+                      </div>
+                      <div class="close-circle"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></div>
+                    </li>
+                    {{/each}}
+
+
+                    <li>
+                      <div class="total">
+                        <h5>subtotal : <span>{{subTotal}}</span></h5>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="buttons"><a href="/product/view-cart" class="view-cart">view
+                          cart</a> <a href="/product/checkout" class="checkout">checkout</a></div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bottom-part bottom-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3">
+        <div class="category-menu d-none d-xl-block h-100">
+          <div id="toggle-sidebar" class="toggle-sidebar">
+            <i class="fa fa-bars sidebar-bar"></i>
+
+            <h5 class="mb-0">shop by Category</h5>
+          </div>
+        </div>
+        <div class="sidenav fixed-sidebar marketplace-sidebar svg-icon-menu">
+          <nav>
+
+            <div>
+              <div class="sidebar-back text-start d-xl-none d-block"><i class="fa fa-angle-left pe-2"
+                  aria-hidden="true"></i> Back</div>
+            </div>
+            <ul id="sub-menu" class="sm pixelstrap sm-vertical">
+              {{#each categories}}
+              <li> <a href="/product?category={{id}}">{{name}}</a></li>
+              {{/each}}
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="col-xl-9">
+        <div class="main-nav-center">
+          <nav id="main-nav" class="text-start">
+            <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+            <ul id="main-menu" class="sm pixelstrap sm-horizontal">
+              <li>
+                <div class="mobile-back text-end">Back<i class="fa fa-angle-right ps-2" aria-hidden="true"></i>
+                </div>
+              </li>
+              <li><a href="/">Home</a></li>
+              {{#ifEquals currentUser.userType "admin"}}
+              <li><a href="/category/create">Create Category</a></li>
+              <li><a href="/product/create">Create Products</a></li>
+              {{/ifEquals}}
+              <li><a href="/product">All Products</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+<!-- End of Header -->
 <div class="breadcrumb-section">
   <div class="container">
     <div class="row">
@@ -42,7 +185,7 @@
             <div class="form-group">
               <label for="review">Product Category</label>
               <select name="product_category" class="form-control">
-                {{#each categoryListDB}}
+                {{#each categories}}
                 <option value="{{this._id}}">{{this.name}}</option>
                 {{/each}}
               </select>

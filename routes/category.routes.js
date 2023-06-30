@@ -5,7 +5,8 @@ const Category = require("../models/Category.model");
 
 
 router.get('/create', async (req, res, next) => {
-    res.render('category/create')
+    const categories = await Category.find();
+    res.render('category/create', {categories})
 })
 
 router.post('/create', async (req,res, next)=> {
@@ -18,8 +19,5 @@ router.post('/create', async (req,res, next)=> {
         console.log('error while looking up category in DB', err)
       }
 })
-
-
-
 
 module.exports = router;
