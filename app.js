@@ -35,43 +35,43 @@ app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 
 
 // -----------------Registering Category Partial Start -----------------------//
-// const fs = require('fs')
-// const path = require('path');
-// const Category = require("./models/Category.model")
+const fs = require('fs')
+const path = require('path');
+const Category = require("./models/Category.model")
 
-// // Register the partials directory
-// hbs.registerPartials(__dirname);
+// Register the partials directory
+hbs.registerPartials(__dirname);
 
-// // Read the layout template file
-// const layoutTemplate = fs.readFileSync('./views/layout.hbs', 'utf8'); // uncompiled layoutTemplate.hbs
-// // Read the layout template file
-
-
-// // Compile the layout template
-// const compiledLayout = hbs.compile(layoutTemplate); // compiled layoutTemplate.hbs
-
-// // Read the partial template file
-// const partialTemplate = fs.readFileSync('./views/partials/categorypartials.hbs', 'utf8'); // uncompiled categorypartials.hbs
-
-// // Compile the partial template
-// const compiledPartial = hbs.compile(partialTemplate); // compiled categorypartials.hbs
+// Read the layout template file
+const layoutTemplate = fs.readFileSync('./views/layout.hbs', 'utf8'); // uncompiled layoutTemplate.hbs
+// Read the layout template file
 
 
-// // Render the partial with the catgeoryList data
-// Category.find().then(categoryList => { // get all categories from db
-//    // id: new Object("649613e8099ec2537626664f")
-//     const modifiedCategoryList = categoryList.map(category => ({
-//         id: category._id.valueOf(), // id: "649613e8099ec2537626664f"
-//         name: category.name,
-//     }));
+// Compile the layout template
+const compiledLayout = hbs.compile(layoutTemplate); // compiled layoutTemplate.hbs
 
-//     // Compile the partial template with categoryList data
-//     const renderedPartial = compiledPartial({categoryList: modifiedCategoryList});
+// Read the partial template file
+const partialTemplate = fs.readFileSync('./views/partials/categorypartials.hbs', 'utf8'); // uncompiled categorypartials.hbs
+
+// Compile the partial template
+const compiledPartial = hbs.compile(partialTemplate); // compiled categorypartials.hbs
+
+
+// Render the partial with the catgeoryList data
+Category.find().then(categoryList => { // get all categories from db
+   // id: new Object("649613e8099ec2537626664f")
+    const modifiedCategoryList = categoryList.map(category => ({
+        id: category._id.valueOf(), // id: "649613e8099ec2537626664f"
+        name: category.name,
+    }));
+
+    // Compile the partial template with categoryList data
+    const renderedPartial = compiledPartial({categoryList: modifiedCategoryList});
     
-//     // Register the rendered partial template
-//     // categoryPartial - A  partial key to be replaced
-//     hbs.registerPartial("categoryPartial", renderedPartial);
-//   });
+    // Register the rendered partial template
+    // categoryPartial - A  partial key to be replaced
+    hbs.registerPartial("categoryPartial", renderedPartial);
+  });
 
 
 // -----------------Registering Category Partial Finished -----------------------//
