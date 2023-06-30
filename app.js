@@ -36,6 +36,7 @@ app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 
 // -----------------Registering Category Partial Start -----------------------//
 const fs = require('fs')
+const path = require('path');
 const Category = require("./models/Category.model")
 
 // Register the partials directory
@@ -52,8 +53,10 @@ const layoutTemplate = fs.readFileSync(layoutFilePath, 'utf8');// uncompiled lay
 const compiledLayout = hbs.compile(layoutTemplate); // compiled layoutTemplate.hbs
 
 // Read the partial template file
-const partialTemplate = fs.readFileSync('./views/partials/categorypartials.hbs', 'utf8'); // uncompiled categorypartials.hbs
+//const partialTemplate = fs.readFileSync('./views/partials/categorypartials.hbs', 'utf8'); // uncompiled categorypartials.hbs
 
+const partialFilePath = path.join(__dirname, 'views', 'partials', 'categorypartials.hbs');
+const partialTemplate = fs.readFileSync(partialFilePath, 'utf8');
 // Compile the partial template
 const compiledPartial = hbs.compile(partialTemplate); // compiled categorypartials.hbs
 
