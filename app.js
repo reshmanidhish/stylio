@@ -42,7 +42,11 @@ const Category = require("./models/Category.model")
 hbs.registerPartials(__dirname);
 
 // Read the layout template file
-const layoutTemplate = fs.readFileSync('./views/layout.hbs', 'utf8'); // uncompiled layoutTemplate.hbs
+//const layoutTemplate = fs.readFileSync('./views/layout.hbs', 'utf8'); // uncompiled layoutTemplate.hbs
+// Read the layout template file
+const layoutFilePath = path.join(__dirname, 'views', 'layout.hbs');
+const layoutTemplate = fs.readFileSync(layoutFilePath, 'utf8');// uncompiled layoutTemplate.hbs
+
 
 // Compile the layout template
 const compiledLayout = hbs.compile(layoutTemplate); // compiled layoutTemplate.hbs
