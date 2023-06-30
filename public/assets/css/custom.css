@@ -1,0 +1,9 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+.product-box .cart-info i, .product-box .cart-wrap i, .product-wrap .cart-info i, .product-wrap .cart-wrap i {
+    color: #120000;
+    background: white;
+}

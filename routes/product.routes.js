@@ -193,12 +193,14 @@ res.redirect('/product')
 })
 
 
-router.get('view', async (req,res, next)=> {
+
+router.get("/add-to-cart/:productId", async (req, res, nex) => {
   try {
+    const product = await Product.findOne({ _id: req.params.productId });
+    res.render("product/add-to-cart", { product });
   }
   catch (err) {
-    console.log("", err);
+    console.log("error", err);
   }
 })
-
 module.exports = router;
