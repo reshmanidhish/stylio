@@ -46,7 +46,7 @@ hbs.registerPartials(__dirname);
 //const layoutTemplate = fs.readFileSync('./views/layout.hbs', 'utf8'); // uncompiled layoutTemplate.hbs
 // Read the layout template file
 
-const layoutFilePath = path.resolve(__dirname, 'views', 'layout.hbs');
+const layoutFilePath = path.resolve(__dirname, './','views', 'layout.hbs');
 const layoutTemplate = fs.readFileSync(layoutFilePath, 'utf8');// uncompiled layoutTemplate.hbs
 
 
@@ -56,7 +56,7 @@ const compiledLayout = hbs.compile(layoutTemplate); // compiled layoutTemplate.h
 // Read the partial template file
 //const partialTemplate = fs.readFileSync('./views/partials/categorypartials.hbs', 'utf8'); // uncompiled categorypartials.hbs
 
-const partialFilePath = path.resolve(__dirname, 'views', 'partials', 'categorypartials.hbs');
+const partialFilePath = path.resolve(__dirname, './','views', 'partials', 'categorypartials.hbs');
 const partialTemplate = fs.readFileSync(partialFilePath, 'utf8');
 // Compile the partial template
 const compiledPartial = hbs.compile(partialTemplate); // compiled categorypartials.hbs
