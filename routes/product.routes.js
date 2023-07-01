@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product.model");
 const Category = require("../models/Category.model");
+const User = require("../models/User.model");
 const fileUploader = require("../config/cloudinary.config");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
@@ -110,14 +111,21 @@ router.get("/view/:productId", async (req, res, next) => {
 
 router.get("/", async (req, res) => {
   try {
+
+    let currentUser = {} 
+    if(req.session.currentUser){
+      currentUser = await User.findOne({email: req.session.currentUser.email})
+      currentUser.loggedIn = true;
+    }
+
     const categories = await Category.find(); 
     const { category } = req.query;
     if (category) {
       const allProductsDB = await Product.find({ product_category: category });
-      res.render("product/allproduct", { allProductsDB, categories });
+      res.render("product/allproduct", { allProductsDB, categories, currentUser });
     } else {
       const allProductsDB = await Product.find();
-      res.render("product/allproduct", { allProductsDB, categories });
+      res.render("product/allproduct", { allProductsDB, categories, currentUser });
     }
   } catch (err) {
     console.log("while rendering allproduct", err);
