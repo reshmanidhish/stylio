@@ -24,32 +24,32 @@ router.get("/create", async (req, res, nex) => {
 });
 
 // Need to check
-router.post(
-  "/create",
-  fileUploader.single("product-image-cover"),
-  async (req, res, next) => {
-    try {
-      if (req?.session?.currentUser) {
-        if (req.session.currentUser.userType === "admin") {
-          const productDetails = await Product.findOne({
-            _id: req.params.productId,
-          }); //get the product
-          const categoryDB = await Category.find(); //get the category
+// router.post(
+//   "/create",
+//   fileUploader.single("product-image-cover"),
+//   async (req, res, next) => {
+//     try {
+//       if (req?.session?.currentUser) {
+//         if (req.session.currentUser.userType === "admin") {
+//           const productDetails = await Product.findOne({
+//             _id: req.params.productId,
+//           }); //get the product
+//           const categoryDB = await Category.find(); //get the category
 
-          let product = { details: productDetails, category: categoryDB };
+//           let product = { details: productDetails, category: categoryDB };
 
-          res.render("product/update", { product });
-        } else {
-          res.redirect("/");
-        }
-      } else {
-        res.redirect("/");
-      }
-    } catch (err) {
-      console.log("error while looking up category in DB", err);
-    }
-  }
-);
+//           res.render("product/update", { product });
+//         } else {
+//           res.redirect("/");
+//         }
+//       } else {
+//         res.redirect("/");
+//       }
+//     } catch (err) {
+//       console.log("error while looking up category in DB", err);
+//     }
+//   }
+// );
 
 router.post("/create", fileUploader.single("image"), async (req, res, next) => {
   try {
