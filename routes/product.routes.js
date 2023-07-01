@@ -6,6 +6,8 @@ const User = require("../models/User.model");
 const fileUploader = require("../config/cloudinary.config");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
+
+
 router.get("/create", async (req, res, nex) => {
   try {
     if (req?.session?.currentUser) {
@@ -82,6 +84,8 @@ router.post("/create", fileUploader.single("image"), async (req, res, next) => {
       created_date,
       updated_date,
     });
+
+    console.log("creatProductDB", creatProductDB )
     res.redirect("/");
   } catch (err) {
     console.log("error while posting product in DB", err);
