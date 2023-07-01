@@ -165,7 +165,7 @@
                     </li>
                     <li>
                       <div class="buttons"><a href="/product/view-cart" class="view-cart">view
-                          cart</a> <a href="/product/checkout" class="checkout">checkout</a></div>
+                          cart</a> <a href="/order/checkout" class="checkout">checkout</a></div>
                     </li>
                   </ul>
                 </li>
@@ -518,8 +518,8 @@
   <!-- Theme js-->
   <script src="/assets/js/theme-setting.js"></script>
   <script src="/assets/js/script.js"></script>
-
-
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/assets/js/payment.js"></script>
   <script>
     $(window).on('load', function () {
       setTimeout(function () {
