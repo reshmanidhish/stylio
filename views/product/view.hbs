@@ -1,0 +1,144 @@
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-title">
+          <h2>product</h2>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <nav aria-label="breadcrumb" class="theme-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">product</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="section-b-space">
+  <div class="collection-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="product-slick slick-initialized slick-slider"><button class="slick-prev slick-arrow"
+              aria-label="Previous" type="button" style="display: block;">Previous</button>
+            <div class="slick-list draggable">
+              <div class="slick-track" style="opacity: 1; width: 2704px;">
+                <div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false"
+                  style="width: 676px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;">
+                  <div>
+                    <div style="width: 100%; display: inline-block;"><img src="{{product.image}}" alt=""
+                        class="img-fluid blur-up image_zoom_cls-0 lazyloaded">
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div><button class="slick-next slick-arrow" aria-label="Next" type="button"
+              style="display: block;">Next</button>
+          </div>
+         
+          
+        </div>
+        <div class="col-lg-6 rtl-text">
+          <div class="product-right">
+            
+            <h2>{{product.name}}</h2>
+
+
+            <div class="label-section">
+              <span class="badge badge-grey-color">#1 Best seller</span>
+
+            </div>
+            <h3 class="price-detail">{{product.price}}€ </h3>
+            <div class="border-product">
+              <h6 class="product-title">Discount</h6>
+              <div >
+                {{product.discount}}%
+              </div>
+            </div>
+            
+            <div id="selectSize" class="addeffect-section product-description border-product">
+              <h6 class="product-title size-text">Dimension 
+                    </h6>
+              
+              <h6 class="error-message">please select size</h6>
+              <div class="size-box">
+                <div>{{product.dimensions}}</div>
+              </div>
+              <h6 class="product-title">quantity</h6>
+              <div class="qty-box">
+                <div class="input-group"><span class="input-group-prepend"><button type="button"
+                      class="btn quantity-left-minus" data-type="minus" data-field=""><i
+                        class="ti-angle-left"></i></button> </span>
+                  <input type="text" name="quantity" class="form-control input-number" value="1">
+                  <span class="input-group-prepend"><button type="button" class="btn quantity-right-plus"
+                      data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span>
+                </div>
+              </div>
+            </div>
+            <div class="product-buttons"><a href="/product/add-to-cart/{{product.id}}" id="cartEffect"
+                class="btn btn-solid hover-solid btn-animation"><i class="fa fa-shopping-cart me-1"
+                  aria-hidden="true"></i> add to cart</a> </div>
+            
+            <div class="border-product">
+              <h6 class="product-title">Description</h6>
+              <div >
+                {{product.description}}
+              </div>
+            </div>
+
+            <div class="border-product">
+              <h6 class="product-title">Material</h6>
+              <div >
+                {{product.material}}
+              </div>
+            </div>
+            <div class="border-product">
+              <h6 class="product-title">care instructions</h6>
+              <div >
+               {{product.care_instructions}}
+              </div>
+            </div>
+            <div class="border-product">
+              <h6 class="product-title">shipping info</h6>
+              <ul class="shipping-info">
+                <li>100% Original Products</li>
+                <li>Free Delivery on order above 50€</li>
+                
+                <li>Easy 30 days returns and exchanges</li>
+              </ul>
+            </div>
+           
+
+            <div class="border-product">
+
+
+ <div class="row">
+          <div class="col-lg-3">
+            <div class="form-group">
+      
+             <button>
+<a class="btn btn-solid w-auto" href="/product/{{product.id}}/edit">Edit</a>
+             </button> 
+      
+             <button>
+<a class="btn btn-solid w-auto" href="/product/{{product.id}}/delete">Delete</a>
+             </button> 
+
+         </div>
+          </div>
+        </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

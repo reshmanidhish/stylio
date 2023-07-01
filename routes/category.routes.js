@@ -5,14 +5,14 @@ const Category = require("../models/Category.model");
 
 
 router.get('/create', async (req, res, next) => {
-    res.render('category/create')
+    const categories = await Category.find();
+    res.render('category/create', {categories})
 })
 
 router.post('/create', async (req,res, next)=> {
     try {
         const {name, description, created_date, updated_date } = req.body;
         const DBcategory = await Category.create({name, description, created_date, updated_date })
-        console.log(DBcategory)
         res.redirect('/')
     }
     catch(err){

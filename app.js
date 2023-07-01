@@ -12,6 +12,10 @@ const express = require("express");
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
+hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
 
 const app = express();
 
@@ -31,18 +35,11 @@ app.use("/", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
-
 const productRoutes = require("./routes/product.routes");
 app.use("/product", productRoutes);
 
-// const orderRoutes = require("./routes/order.routes");
-// app.use("/order", orderRoutes);
-
 const categoryRoutes = require("./routes/category.routes");
 app.use("/category", categoryRoutes);
-
-
-
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

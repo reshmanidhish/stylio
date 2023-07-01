@@ -43,6 +43,28 @@ module.exports = (app) => {
   app.set("views", path.join(__dirname, "..", "views"));
   // Sets the view engine to handlebars
   app.set("view engine", "hbs");
+  // app.engine('hbs', function (filePath, options, callback) {
+  //   const fs = require('fs');
+  //   fs.readFile(filePath, 'utf-8', function (err, content) {
+  //     if (err) return callback(err);
+  
+  //     // Register the ifEquals helper
+  //     const ifEquals = function (arg1, arg2, opts) {
+  //       return (arg1 == arg2) ? opts.fn(this) : opts.inverse(this);
+  //     };
+  
+  //     // Replace the helper placeholder in the content with the actual helper function
+  //     const rendered = content.replace('{{#ifEquals}}', '{{#ifEquals arg1 arg2}}');
+  
+  //     // Compile the modified content using the built-in Handlebars module
+  //     const compiled = app.get('view').prototype.compile(rendered);
+  
+  //     // Render the compiled template with the provided options
+  //     const renderedTemplate = compiled(options);
+  
+  //     return callback(null, renderedTemplate);
+  //   });
+  // });
   // AHandles access to the public folder
   app.use(express.static(path.join(__dirname, "..", "public")));
 

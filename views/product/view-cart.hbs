@@ -1,0 +1,88 @@
+
+<section class="cart-section section-b-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="cart_counter">
+                        <div class="countdownholder">
+                            Your cart will be expired in<span id="timer">14:12</span> minutes!
+                        </div>
+                        <a href="checkout.html" class="cart_checkout btn btn-solid btn-xs">check out</a>
+                    </div>
+                </div>
+                <div class="col-sm-12 table-responsive-xs">
+                    <table class="table cart-table">
+                        <thead>
+                            <tr class="table-head">
+                                <th scope="col">image</th>
+                                <th scope="col">product name</th>
+                                <th scope="col">price</th>
+                                <th scope="col">quantity</th>
+                                <th scope="col">action</th>
+                                <th scope="col">total</th>
+                            </tr>
+                         
+                        </thead>
+                        <tbody>
+                            {{#each cartItems}}
+                            <tr>
+                                <td>
+                                    <a href="#"><img src="{{image}}" alt=""></a>
+                                </td>
+                                <td><a href="#"><h5>{{name}}</h3></a>
+                                    <div class="mobile-cart-content row">
+                                        <div class="col">
+                                            <div class="qty-box">
+                                                <div class="input-group">
+                                                    <input type="text" name="quantity" class="form-control input-number" value="1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- <div class="col">
+                                            <h2 class="td-color">$63.00</h2>
+                                        </div>
+                                        <div class="col">
+                                            <h2 class="td-color"><a href="#" class="icon"><i class="ti-close"></i></a>
+                                            </h2>
+                                        </div> --}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <h2>{{price}}</h2>
+                                </td>
+                                <td>
+                                    <div class="qty-box">
+                                        <div class="input-group">
+                                            <input type="number" name="quantity" class="form-control input-number" value="1">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><a href="#" class="icon"><i class="ti-close"></i></a></td>
+                                <td>
+                                    <h2 class="td-color">{{price}}</h2>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                      
+                    </table>
+                    <div class="table-responsive-md">
+                        <table class="table cart-table ">
+                            <tfoot>
+                                <tr>
+                                    <td>total price :</td>
+                                    <td>
+                                        <h2>{{subTotal}}</h2>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row cart-buttons">
+                <div class="col-6"><a href="#" class="btn btn-solid">continue shopping</a></div>
+                <div class="col-6"><a href="#" class="btn btn-solid">check out</a></div>
+            </div>
+        </div>
+    </section>
