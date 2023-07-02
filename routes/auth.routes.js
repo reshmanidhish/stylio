@@ -28,7 +28,7 @@ router.get("/register", async (req, res, next) => {
 router.post("/register", async (req, res, next) => {
   const categories = await Category.find();
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password ,address,phoneNumber} = req.body;
 
     if (email === "" || password === "") {
       res.status(400).render("auth/register", {
@@ -53,12 +53,14 @@ router.post("/register", async (req, res, next) => {
       email,
       firstName,
       lastName,
+      address,
+      phoneNumber,
       userType: "customer",
       password: hashedpassword,
     });
 
-    req.session.currentUser = { email, firstName, lastName };
-    res.redirect(`/auth/profile`);
+    req.session.currentUser = { email, firstName, lastName,address,phoneNumber};
+    res.redirect(`/`);
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       res.status(500).render("auth/register", { errorMessage: error.message });
@@ -121,11 +123,12 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
     }
 
     const user = await User.findOne({ email });
+
     if (!user) {
       res.render("auth/login", { errorMessage: "Wrong credentials." });
       return;
     } else if (bcrypt.compare(password, user.password)) {
-      req.session.currentUser = { email: email, userType: user.userType };
+      req.session.currentUser = { email: email, userType: user.userType ,address:user.address,phoneNumber:user.phoneNumber};
       User.loggedIn = true;
       res.redirect("/");
     } else {
