@@ -10,13 +10,13 @@ const Category = require('../models/Category.model');
 /* GET home page */
 router.get("/", async (req, res, next) => {
   try {
-   let {cartItems, currentUser}=req.session
+   let {cartItems, currentUser,subTotal}=req.session
     const categories = await Category.find(); 
     console.log('currentUser----home--->{}', currentUser)
     if(currentUser){
-      res.render('index', { currentUser, categories, cartItems })
+      res.render('index', { currentUser, categories, cartItems,subTotal })
      }else{
-      res.render("index", { categories, cartItems } );
+      res.render("index", { categories, cartItems,subTotal } );
      }
   }
    catch(err){

@@ -3,7 +3,14 @@ body{
     padding: 0px;
 }
 
-.product-box .cart-info i, .product-box .cart-wrap i, .product-wrap .cart-info i, .product-wrap .cart-wrap i {
-    color: #120000;
-    background: white;
+.product-box .cart-info.cart-wrap, .product-box .cart-wrap.cart-wrap, .product-wrap .cart-info.cart-wrap, .product-wrap .cart-wrap.cart-wrap {
+    background-color: white !important;
+    border-color: #5b3c2657 !important;
+    border-style: solid !important;
+    border-width: 0.1px !important;
 }
+
+/* .checkout-page .checkout-form .checkout-details {
+    margin-left: 15%;
+    margin-right: 15%;
+} */

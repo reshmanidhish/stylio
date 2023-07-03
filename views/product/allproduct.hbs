@@ -204,6 +204,7 @@
 
 
 
+
                                     {{!-- products starts here --}}
                                     <div class="product-wrapper-grid">
                                         <div class="row margin-res">
@@ -226,13 +227,20 @@
                                                                     style="display: none;"></a>
                                                         </div>
                                                         <div class="cart-info cart-wrap">
-                                                            <a href="/product/add-to-cart/{{_id}}" title="Add to Wishlist"><i
+
+                                                            <a href="/product/add-to-cart/{{_id}}" title="Add to Cart"><i
                                                                     class="ti-shopping-cart" aria-hidden="true"></i></a>
-                                                             <a href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#quick-view" title="Quick View"><i
-                                                                    class="ti-search" aria-hidden="true"></i></a> 
-                                                            <a href="compare.html" title="Compare"><i class="ti-reload"
-                                                                    aria-hidden="true"></i></a>
+
+                                                            <a href="/product/view/{{_id}}" title="View Product">
+                                                                <i class="ti-eye" aria-hidden="true"></i>
+                                                            </a> 
+                                                             <a href="/product/{{_id}}/edit" title="Edit Product">
+                                                                <i class="ti-pencil-alt" aria-hidden="true"></i>
+                                                            </a> 
+
+                                                            <a href="/product/{{_id}}/delete" title="Delete Product">
+                                                                <i class="ti-trash" aria-hidden="true"></i>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                     <div class="product-detail">
@@ -256,7 +264,7 @@
                                                 </div>
                                             </div>
                                             {{/each}}
-                                            <li><a href="/product/{{allProductsDB.id}}/edit">Edit</a></li>
+                                            {{!-- <li><a href="/product/{{allProductsDB.id}}/edit">Edit</a></li> --}}
                                         </div>
                                     </div>
                                     <div class="product-pagination">
