@@ -55,14 +55,14 @@
                                     </select>
                                 </div> --}}
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <div class="field-label">Address</div>
-                                    <input type="text" name="field-name" value="" placeholder="Street address">
+                                   {{currentUser.address}}
+                                   
                                 </div>
-                                
+{{!--                                 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <input type="checkbox" name="shipping-option" id="account-option">  
                                     <label for="account-option">Create An Account?</label>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12 col-xs-12">
@@ -75,12 +75,12 @@
                                       {{#each cartItems}}
                                     <ul class="qty">
                                        
-                                        <li>{{name}} <span>{{price}}</span></li>
+                                        <li>{{name}} <span>{{price}}€</span></li>
                                        
                                     </ul>
                                     {{/each }}
                                     <ul class="sub-total">
-                                        <li>Subtotal <span class="count"></span></li>
+                                        {{!-- <li>Subtotal <span class="count"></span></li> --}}
                                         <li>Shipping
                                             <div class="shipping">
                                                 <div class="shopping-option">
@@ -95,7 +95,7 @@
                                         </li>
                                     </ul>
                                     <ul class="total">
-                                        <li>Total <span class="count">$620.00</span></li>
+                                        <li>Total <span class="count">{{subTotal}}€</span></li>
                                     </ul>
                                      
                                 </div>

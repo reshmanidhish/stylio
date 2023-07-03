@@ -10,14 +10,13 @@ const Category = require('../models/Category.model');
 /* GET home page */
 router.get("/", async (req, res, next) => {
   try {
-   let {cartItems}=req.session
+   let {cartItems, currentUser}=req.session
     const categories = await Category.find(); 
-    if(req.session.currentUser){
-      const currentUser = await User.findOne({email: req.session.currentUser.email})
-      currentUser.loggedIn = true;
-      res.render('index', { currentUser, categories,cartItems })
+    console.log('currentUser----home--->{}', currentUser)
+    if(currentUser){
+      res.render('index', { currentUser, categories, cartItems })
      }else{
-      res.render("index", { categories } );
+      res.render("index", { categories, cartItems } );
      }
   }
    catch(err){

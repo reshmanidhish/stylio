@@ -6,7 +6,8 @@ const Category = require("../models/Category.model");
 
 router.get("/checkout", async (req, res) => {
   const categories = await Category.find();
-  res.render("order/checkout", { categories });
+  let {currentUser, cartItems, subTotal} = req.session
+  res.render("order/checkout", { categories,cartItems,subTotal,currentUser});
 });
 
 router.post("/checkout", async (req, res, nex) => {
@@ -69,5 +70,8 @@ router.post("/create-payment-intent", async (req, res) => {
     clientSecret: paymentIntent.client_secret,
   });
 });
+router.get("/paymentStatus",async (req, res) => {
+    res.render('order/paymentStatus')
+})
 
 module.exports = router;

@@ -8,7 +8,7 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/create", async (req, res, nex) => {
   try {
-    let{currentUser,cartItems}=req.session
+    const {currentUser, cartItems} = req.session
     if (req?.session?.currentUser) {
       if (req.session.currentUser.userType === "admin") {
         const categories = await Category.find(); 
@@ -23,34 +23,13 @@ router.get("/create", async (req, res, nex) => {
     console.log("error while looking up category in DB", err);
   }
 });
+router.get("/createStatus",async (req, res) => {
+  res.render('/product/createStatus')
+})
 
 
-// router.post(
-//   "/create",
-//   fileUploader.single("product-image-cover"),
-//   async (req, res, next) => {
-//     try {
-//       if (req?.session?.currentUser) {
-//         if (req.session.currentUser.userType === "admin") {
-//           const productDetails = await Product.findOne({
-//             _id: req.params.productId,
-//           }); //get the product
-//           const categoryDB = await Category.find(); //get the category
 
-//           let product = { details: productDetails, category: categoryDB };
 
-//           res.render("product/update", { product });
-//         } else {
-//           res.redirect("/");
-//         }
-//       } else {
-//         res.redirect("/");
-//       }
-//     } catch (err) {
-//       console.log("error while looking up category in DB", err);
-//     }
-//   }
-// );
 
 router.post("/create", fileUploader.single("product-image-cover"), async (req, res, next) => {
   try { 
@@ -85,7 +64,7 @@ router.post("/create", fileUploader.single("product-image-cover"), async (req, r
       created_date,
       updated_date,
     });
-    res.redirect("/");
+    res.redirect("/createStatus");
   } catch (err) {
     console.log("error while posting product in DB", err);
   }
@@ -106,6 +85,7 @@ router.get("/search", async (req, res, nex) => {
 router.get("/view/:productId", async (req, res, next) => {
   try {
     let{currentUser,cartItems}=req.session
+    console.log(currentUser)
     const product = await Product.findOne({ _id: req.params.productId });
     const categories = await Category.find(); 
     res.render("product/view", { product, categories,currentUser,cartItems });
@@ -117,11 +97,11 @@ router.get("/view/:productId", async (req, res, next) => {
 router.get("/", async (req, res) => {
   try {
 
-let{cartItems}=req.session
+let{cartItems, currentUser}=req.session
     // let currentUser = {} 
     if(req.session.currentUser){
-      currentUser = await User.findOne({email: req.session.currentUser.email})
-      currentUser.loggedIn = true;
+      // currentUser = await User.findOne({email: req.session.currentUser.email})
+      // currentUser.loggedIn = true;
     }
 
     const categories = await Category.find(); 
@@ -255,10 +235,10 @@ router.get("/view-cart", async (req, res) => {
   res.render("product/view-cart",{ cartItems, subTotal, categories,currentUser});
 });
 
-router.get("/checkout", async(req, res) => {
-  const categories = await Category.find(); 
-  let {currentUser,cartItems, subTotal}= req.session
-  res.render("product/checkout", {categories,currentUser,cartItems,subTotal});
-});
+// router.get("/checkout", async(req, res) => {
+//   const categories = await Category.find(); 
+//   let {currentUser, cartItems, subTotal} = req.session
+//   res.render("product/checkout", {categories,currentUser,cartItems,subTotal});
+// });
 
 module.exports = router;
