@@ -5,7 +5,7 @@
                 <div class="col-sm-12">
                     <div class="cart_counter">
                         <div class="countdownholder">
-                            Your have {{cartItems.length}}<span id="timer">14:12</span> minutes!
+                            You have {{cartItems.length}}<span id="timer">14:12</span> minutes!
                         </div>
                         <a href="/product/checkout" class="cart_checkout btn btn-solid btn-xs">check out</a>
                     </div>
@@ -53,11 +53,11 @@
                                 <td>
                                     <div class="qty-box">
                                         <div class="input-group">
-                                            <input type="number" name="quantity" class="form-control input-number" value="1">
+                                            <input type="number" name="quantity" class="form-control input-number" value="{{quantity}}">
                                         </div>
                                     </div>
                                 </td>
-                                <td><a href="#" class="icon"><i class="ti-close"></i></a></td>
+                                <td><a href="/product/{{id}}/delete" class="icon"><i class="ti-close"></a></i></td>
                                 <td>
                                     <h2 class="td-color">{{price}}</h2>
                                 </td>
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="row cart-buttons">
-                <div class="col-6"><a href="/product/allproduct" class="btn btn-solid">continue shopping</a></div>
+                <div class="col-6"><a href="/product" class="btn btn-solid">continue shopping</a></div>
                 <div class="col-6"><a href="/order/checkout" class="btn btn-solid">check out</a></div>
             </div>
         </div>

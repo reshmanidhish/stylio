@@ -5,8 +5,14 @@ const User = require("../models/User.model");
 const Category = require("../models/Category.model");
 
 router.get("/checkout", async (req, res) => {
-  const categories = await Category.find();
-  res.render("order/checkout", { categories });
+  try{
+    const userBuIdDB = await User.find()
+    const  categories = await Category.find()
+    res.render("order/checkout", { userBuIdDB, categories });
+  }
+  catch (err) {
+    console.log("", err);
+  }
 });
 
 router.post("/checkout", async (req, res, nex) => {
@@ -32,6 +38,8 @@ router.post("/checkout", async (req, res, nex) => {
     console.log(" error ", err);
   }
 });
+
+
 
 
 

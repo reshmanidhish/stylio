@@ -1,22 +1,4 @@
-<div class="breadcrumb-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="page-title">
-          <h2>product</h2>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <nav aria-label="breadcrumb" class="theme-breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">product</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-  </div>
-</div>
+
 <section class="section-b-space">
   <div class="collection-wrapper">
     <div class="container">
@@ -79,9 +61,13 @@
                 </div>
               </div>
             </div>
-            <div class="product-buttons"><a href="/product/add-to-cart/{{product.id}}" id="cartEffect"
-                class="btn btn-solid hover-solid btn-animation"><i class="fa fa-shopping-cart me-1"
-                  aria-hidden="true"></i> add to cart</a> </div>
+            <div class="product-buttons">
+              <a href="/product/add-to-cart/{{product.id}}" id="cartEffect"
+                class="btn btn-solid hover-solid btn-animation">::before <i class="fa fa-shopping-cart me-1" aria-hidden="true">::before</i>
+                "Added to cart" </a> </div>
+
+
+</div>
 
             <div class="border-product"> 
               <h6 class="product-title">Description</h6>
@@ -118,13 +104,13 @@
 
  <div class="row">
           <div class="col-lg-3">
-            <div class="form-group" style="display:flex; justify-content: space-evenly; margin-left: 5rem;">
-      
-          
-<a class="btn btn-solid w-auto" href="/product/{{product.id}}/edit">Edit</a>
+            <div class="form-group" style="display:flex; justify-content: space-evenly; margin-left: 5rem; margin-top: 0.7rem">
       
          
+<a class="btn btn-solid w-auto" href="/product/{{product.id}}/edit">Edit</a>
+    
 <a style="margin-left: 1rem" class="btn btn-solid w-auto" href="/product/{{product.id}}/delete">Delete</a>
+
 
          </div>
           </div>
@@ -138,5 +124,11 @@
     </div>
   </div>
 </section>
+
+<script>
+  function success() {
+    alert("added to your cart");
+  }
+</script>
 
 

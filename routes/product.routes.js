@@ -118,9 +118,11 @@ router.get("/search", async (req, res, nex) => {
 
 router.get("/view/:productId", async (req, res, next) => {
   try {
-    const product = await Product.findOne({ _id: req.params.productId });
+  
+    const product = await Product.findOne({ _id: req.params.productId});
     const categories = await Category.find(); 
     res.render("product/view", { product, categories });
+    
   } catch (err) {
     console.log("while rendering view", err);
   }
@@ -161,7 +163,7 @@ router.get("/:id/edit", async (req, res, next) => {
   }
 });
 
-router.post("/:id/edit", isLoggedIn, async (req, res, next) => {
+router.post("/:id/edit", isLoggedIn, fileUploader.single("image"), async (req, res, next) => {
   try {
     if (req.session.currentUser) {
       const { id } = req.params;
@@ -196,6 +198,7 @@ router.post("/:id/edit", isLoggedIn, async (req, res, next) => {
       });
       updateProduct.loggedIn = true;
       res.redirect("/allproduct");
+    
     } else {
       const categories = await Category.find(); 
       res.render("product/create",  {categories});
@@ -207,9 +210,13 @@ router.post("/:id/edit", isLoggedIn, async (req, res, next) => {
 
 router.get("/:id/delete", async (req, res, next) => {
   try {
+    if (req?.session?.currentUser) {
+      if (req.session.currentUser.userType === "admin") {
     const { id } = req.params;
     const categories = await Category.find(); 
     res.render("product/delete", { id, categories });
+      }
+    }
   } catch (err) {
     console.log("while", err);
   }
@@ -217,8 +224,10 @@ router.get("/:id/delete", async (req, res, next) => {
 
 router.post("/:id/delete", async (req, res) => {
   try {
+ 
     const deleteProduct = await Product.findByIdAndRemove(req.params.id);
     res.redirect("/product");
+    
   } catch (err) {
     console.log("", err);
   }
@@ -254,12 +263,17 @@ router.get("/added-to-cart", async (req, res, nex) => {
 });
 
 router.get("/view-cart", async (req, res) => {
-  const categories = await Category.find(); 
-  let { cartItems, subTotal } = req.session;
-  if(!subTotal) {
-    subTotal = 0
+  try {
+    const categories = await Category.find(); 
+    let { cartItems, subTotal } = req.session;
+    if(!subTotal) {
+      subTotal = 0
+    }
+    res.render("product/view-cart",{ cartItems, subTotal, categories});
   }
-  res.render("product/view-cart",{ cartItems, subTotal, categories});
+  catch (err) {
+    console.log("view cart erro", err);
+  }
 });
 
 router.get("/checkout", async(req, res) => {
