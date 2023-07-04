@@ -8,10 +8,11 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/create", async (req, res, nex) => {
   try {
+    const {currentUser, cartItems,subTotal} = req.session
     if (req?.session?.currentUser) {
       if (req.session.currentUser.userType === "admin") {
         const categories = await Category.find(); 
-        res.render("product/create", { categories });
+        res.render("product/create", { categories,currentUser,cartItems,subTotal });
       } else {
         res.redirect("/");
       }
@@ -22,37 +23,13 @@ router.get("/create", async (req, res, nex) => {
     console.log("error while looking up category in DB", err);
   }
 });
+router.get("/createStatus",async (req, res) => {
+  res.render('product/createStatus')
+})
 
-// Need to check
-router.post(
-  "/create",
-  fileUploader.single("product-image-cover"),
-  async (req, res, next) => {
-    try {
-      if (req?.session?.currentUser) {
-        if (req.session.currentUser.userType === "admin") {
-          const productDetails = await Product.findOne({
-            _id: req.params.productId,
-          }); //get the product
-          const categoryDB = await Category.find(); //get the category
 
-          let product = { details: productDetails, category: categoryDB };
-
-          res.render("product/update", { product });
-        } else {
-          res.redirect("/");
-        }
-      } else {
-        res.redirect("/");
-      }
-    } catch (err) {
-      console.log("error while looking up category in DB", err);
-    }
-  }
-);
-
-router.post("/create", fileUploader.single("image"), async (req, res, next) => {
-  try {
+router.post("/create", fileUploader.single("product-image-cover"), async (req, res, next) => {
+  try { 
     const {
       name,
       description,
@@ -64,6 +41,7 @@ router.post("/create", fileUploader.single("image"), async (req, res, next) => {
       quantity,
       care_instructions,
       discount,
+      color,
       created_date,
       updated_date,
     } = req.body;
@@ -79,10 +57,11 @@ router.post("/create", fileUploader.single("image"), async (req, res, next) => {
       quantity,
       care_instructions,
       discount,
+      color,
       created_date,
       updated_date,
     });
-    res.redirect("/");
+    res.redirect("/product/createStatus");
   } catch (err) {
     console.log("error while posting product in DB", err);
   }
@@ -90,10 +69,11 @@ router.post("/create", fileUploader.single("image"), async (req, res, next) => {
 
 router.get("/search", async (req, res, nex) => {
   try {
+    let{currentUser,cartItems,subTotal}=req.session
     const searchQuery = { name: { $regex: req.query.name, $options: "i" } }; // using regex for searching case insensitively
     const searchResults = await Product.find(searchQuery);
     const categories = await Category.find(); 
-    res.render("product/search", { searchResults, categories });
+    res.render("product/search", { searchResults, categories,currentUser,cartItems,subTotal });
   } catch (err) {
     console.log("error while searching", err);
   }
@@ -101,9 +81,11 @@ router.get("/search", async (req, res, nex) => {
 
 router.get("/view/:productId", async (req, res, next) => {
   try {
+    let{currentUser,cartItems,subTotal}=req.session
+    console.log(currentUser)
     const product = await Product.findOne({ _id: req.params.productId });
     const categories = await Category.find(); 
-    res.render("product/view", { product, categories });
+    res.render("product/view", { product, categories,currentUser,cartItems,subTotal });
   } catch (err) {
     console.log("while rendering view", err);
   }
@@ -112,10 +94,11 @@ router.get("/view/:productId", async (req, res, next) => {
 router.get("/", async (req, res) => {
   try {
 
-    let currentUser = {} 
+let{cartItems, currentUser,subTotal}=req.session
+    // let currentUser = {} 
     if(req.session.currentUser){
-      currentUser = await User.findOne({email: req.session.currentUser.email})
-      currentUser.loggedIn = true;
+      // currentUser = await User.findOne({email: req.session.currentUser.email})
+      // currentUser.loggedIn = true;
     }
 
     const categories = await Category.find(); 
@@ -125,7 +108,7 @@ router.get("/", async (req, res) => {
       res.render("product/allproduct", { allProductsDB, categories, currentUser });
     } else {
       const allProductsDB = await Product.find();
-      res.render("product/allproduct", { allProductsDB, categories, currentUser });
+      res.render("product/allproduct", { allProductsDB, categories, currentUser,cartItems,subTotal });
     }
   } catch (err) {
     console.log("while rendering allproduct", err);
@@ -134,17 +117,18 @@ router.get("/", async (req, res) => {
 
 router.get("/:id/edit", async (req, res, next) => {
   try {
+    let{currentUser,cartItems,subTotal}=req.session
     const categories = await Category.find(); 
     const productByIdDB = await Product.findById(req.params.id).populate(
       "product_category"
     );
-    res.render("product/edit-product", { productByIdDB, categories });
+    res.render("product/edit-product", { productByIdDB, categories,currentUser,cartItems,subTotal });
   } catch (err) {
     console.error("while getting edit page", err);
   }
 });
 
-router.post("/:id/edit", isLoggedIn, async (req, res, next) => {
+router.post("/:id/edit", isLoggedIn,fileUploader.single("product-image-cover"), async (req, res, next) => {
   try {
     if (req.session.currentUser) {
       const { id } = req.params;
@@ -159,6 +143,7 @@ router.post("/:id/edit", isLoggedIn, async (req, res, next) => {
         quantity,
         care_instructions,
         discount,
+        color,
         created_date,
         updated_date,
       } = req.body;
@@ -174,11 +159,12 @@ router.post("/:id/edit", isLoggedIn, async (req, res, next) => {
         quantity,
         care_instructions,
         discount,
+        color,
         created_date,
         updated_date,
       });
       updateProduct.loggedIn = true;
-      res.redirect("/allproduct");
+      res.redirect("/product");
     } else {
       const categories = await Category.find(); 
       res.render("product/create",  {categories});
@@ -191,8 +177,9 @@ router.post("/:id/edit", isLoggedIn, async (req, res, next) => {
 router.get("/:id/delete", async (req, res, next) => {
   try {
     const { id } = req.params;
+    let{currentUser,cartItems,subTotal}=req.session
     const categories = await Category.find(); 
-    res.render("product/delete", { id, categories });
+    res.render("product/delete", { id, categories ,currentUser,cartItems,subTotal});
   } catch (err) {
     console.log("while", err);
   }
@@ -223,7 +210,7 @@ router.get("/add-to-cart/:productId", async (req, res, nex) => {
     const subTotal= allCartItems.reduce(function(accumulator, product){
       return accumulator + product.price
     },0 );
-    req.session.subTotal = subTotal
+    req.session.subTotal = subTotal.toFixed(2)
     res.redirect("/product/added-to-cart"); // to change the url with params
   } catch (err) {
     console.log("error", err);
@@ -231,23 +218,24 @@ router.get("/add-to-cart/:productId", async (req, res, nex) => {
 });
 
 router.get("/added-to-cart", async (req, res, nex) => {
-  const { cartItems, subTotal } = req.session;
+  const { cartItems, subTotal,currentUser } = req.session;
   const categories = await Category.find(); 
-  res.render("product/add-to-cart", { cartItems, subTotal, categories });
+  res.render("product/add-to-cart", { cartItems, subTotal, categories,currentUser });
 });
 
 router.get("/view-cart", async (req, res) => {
   const categories = await Category.find(); 
-  let { cartItems, subTotal } = req.session;
+  let { cartItems, subTotal,currentUser } = req.session;
   if(!subTotal) {
     subTotal = 0
   }
-  res.render("product/view-cart",{ cartItems, subTotal, categories});
+  res.render("product/view-cart",{ cartItems, subTotal, categories,currentUser});
 });
 
-router.get("/checkout", async(req, res) => {
-  const categories = await Category.find(); 
-  res.render("product/checkout", {categories});
-});
+// router.get("/checkout", async(req, res) => {
+//   const categories = await Category.find(); 
+//   let {currentUser, cartItems, subTotal} = req.session
+//   res.render("product/checkout", {categories,currentUser,cartItems,subTotal});
+// });
 
 module.exports = router;

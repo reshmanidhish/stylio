@@ -35,6 +35,8 @@
   <!-- Theme css -->
   <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 
+  <!-- custom css -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/custom.css">
 
 </head>
 
@@ -165,7 +167,7 @@
                     </li>
                     <li>
                       <div class="buttons"><a href="/product/view-cart" class="view-cart">view
-                          cart</a> <a href="/product/checkout" class="checkout">checkout</a></div>
+                          cart</a> <a href="/order/checkout" class="checkout">checkout</a></div>
                     </li>
                   </ul>
                 </li>
@@ -371,7 +373,7 @@
       </div>
     </div>
   </footer>
-  <div class="modal fade bd-example-modal-lg theme-modal cart-modal" id="addtocart" tabindex="-1" role="dialog"
+  {{!-- <div class="modal fade bd-example-modal-lg theme-modal cart-modal" id="addtocart" tabindex="-1" role="dialog"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -477,7 +479,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
   <!-- Add to cart modal popup end-->
 
 
@@ -518,8 +520,8 @@
   <!-- Theme js-->
   <script src="/assets/js/theme-setting.js"></script>
   <script src="/assets/js/script.js"></script>
-
-
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/assets/js/payment.js"></script>
   <script>
     $(window).on('load', function () {
       setTimeout(function () {

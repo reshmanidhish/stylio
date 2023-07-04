@@ -5,9 +5,9 @@
                 <div class="col-sm-12">
                     <div class="cart_counter">
                         <div class="countdownholder">
-                            Your cart will be expired in<span id="timer">14:12</span> minutes!
+                            Your have {{cartItems.length}}<span id="timer">14:12</span> minutes!
                         </div>
-                        <a href="checkout.html" class="cart_checkout btn btn-solid btn-xs">check out</a>
+                        <a href="/product/checkout" class="cart_checkout btn btn-solid btn-xs">check out</a>
                     </div>
                 </div>
                 <div class="col-sm-12 table-responsive-xs">
@@ -48,7 +48,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <h2>{{price}}</h2>
+                                    <h2>{{price}}€</h2>
                                 </td>
                                 <td>
                                     <div class="qty-box">
@@ -59,7 +59,7 @@
                                 </td>
                                 <td><a href="#" class="icon"><i class="ti-close"></i></a></td>
                                 <td>
-                                    <h2 class="td-color">{{price}}</h2>
+                                    <h2 class="td-color">{{price}}€</h2>
                                 </td>
                             </tr>
                             {{/each}}
@@ -81,8 +81,8 @@
                 </div>
             </div>
             <div class="row cart-buttons">
-                <div class="col-6"><a href="#" class="btn btn-solid">continue shopping</a></div>
-                <div class="col-6"><a href="#" class="btn btn-solid">check out</a></div>
+                <div class="col-6"><a href="/product/allproduct" class="btn btn-solid">continue shopping</a></div>
+                <div class="col-6"><a href="/order/checkout" class="btn btn-solid">check out</a></div>
             </div>
         </div>
     </section>
