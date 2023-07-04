@@ -10,7 +10,6 @@ body{
     border-width: 0.1px !important;
 }
 
-/* .checkout-page .checkout-form .checkout-details {
-    margin-left: 15%;
-    margin-right: 15%;
-} */
+.slick-slide {
+    height: auto;
+}
