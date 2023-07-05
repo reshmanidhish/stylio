@@ -20,10 +20,11 @@ const fileUploader = require("../config/cloudinary.config");
 
 router.get("/register", async (req, res, next) => {
   const categories = await Category.find();
-  if (req.session.currentUser) {
+  if (req?.session?.currentUser) {
+    res.redirect("/auth/profile");
+  } else {
     res.render("auth/register", { loggedIn: true, categories });
   }
-  res.render("auth/register", { categories });
 });
 
 
@@ -181,7 +182,7 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
       console.log('user=======> {}', currentUser)
 
       req.session.currentUser = currentUser
-      res.redirect("/");
+      res.redirect("/auth/profile");
     } else {
       res.render("auth/login", { errorMessage: "Wrong credentials." });
     }
@@ -213,7 +214,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
       return;
     }
 
-    res.redirect("/");
+    res.redirect("/auth/login");
   });
 });
 

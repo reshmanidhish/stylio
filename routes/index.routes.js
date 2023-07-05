@@ -12,7 +12,11 @@ router.get("/", async (req, res, next) => {
   try {
    let {cartItems, currentUser,subTotal}=req.session
     const categories = await Category.find(); 
-    console.log('currentUser----home--->{}', currentUser)
+    if(!cartItems) {
+      cartItems = []
+      req.session.cartItems = cartItems
+    }
+    console.log('currentUser----home--->{}', cartItems)
     if(currentUser){
       res.render('index', { currentUser, categories, cartItems,subTotal })
      }else{
