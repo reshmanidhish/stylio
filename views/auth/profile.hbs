@@ -1,8 +1,87 @@
-{{!-- <div>
-{{#if email}}
-  <h2>Welcome, {{firstName}} !</h2>
-  <img src="../assets/images/profile/user.png" alt="profile image" style="width: 18rem; height:auto;">
-{{else}}
+{{!--
+<div class="profile-details text-center">
+  {{#if email}}
+  <h4>Welcome, {{firstName}} !</h4>
+  <img src="../assets/images/profile/profile avatar1.jpeg" alt="profile image" style="width: 18rem; height:auto;">
+  {{else}}
   <p>Still no logged in user, sorry!</p>
-{{/if}}
+  {{/if}}
 </div> --}}
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Check-out</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="register-page section about-section-stylio  gray-bg pt-0" id="about">
+  <div class="container theme-card">
+    <div class="row align-items-center flex-row-reverse">
+      <div class="col-lg-7">
+        <div class="about-text go-to">
+           {{#if currentUser.email}}
+          <h3 class="dark-color mb-5">Welcome {{currentUser.firstName}} {{#ifEquals currentUser.userType "admin"}} (Admin){{/ifEquals}}</h3>
+          <h6 class="theme-color lead"></h6>
+          <div class="">
+           
+              <div class="media">
+                <label class="me-3 mb-4"><b>First Name</b></label>
+                <span>:  {{currentUser.firstName}}</span>
+              </div>
+              <div class="media">
+                <label class="me-3 mb-4"><b>Last Name</b></label>
+                <span>:  {{currentUser.lastName}}</span>
+              </div>
+              <div class="media">
+                <label class="me-3 mb-4"><b>Address</b></label>
+                <span>:  {{currentUser.address}}</span>
+              </div>
+              <div class="media">
+                <label class="me-3 mb-4"><b>Phone Number</b></label>
+                <span>:  {{currentUser.phoneNumber}}</span>
+              </div>
+           
+            {{!-- <div class="col-md-6">
+              <div class="media">
+                <label>E-mail</label>
+                <p>info@domain.com</p>
+              </div>
+              <div class="media">
+                <label>Phone</label>
+                <p>820-885-3321</p>
+              </div>
+              <div class="media">
+                <label>Skype</label>
+                <p>skype.0404</p>
+              </div>
+              <div class="media">
+                <label>Freelance</label>
+                <p>Available</p>
+              </div>
+            </div> --}}
+              {{/if}}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="about-avatar">
+          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
