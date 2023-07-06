@@ -7,7 +7,7 @@
                         <div class="countdownholder">
                             Your have {{cartItems.length}}<span id="timer">14:12</span> minutes!
                         </div>
-                        <a href="/product/checkout" class="cart_checkout btn btn-solid btn-xs">check out</a>
+                        <a href="/order/checkout" class="cart_checkout btn btn-solid btn-xs">check out</a>
                     </div>
                 </div>
                 <div class="col-sm-12 table-responsive-xs">
@@ -38,13 +38,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{!-- <div class="col">
-                                            <h2 class="td-color">$63.00</h2>
-                                        </div>
-                                        <div class="col">
-                                            <h2 class="td-color"><a href="#" class="icon"><i class="ti-close"></i></a>
-                                            </h2>
-                                        </div> --}}
                                     </div>
                                 </td>
                                 <td>
@@ -59,7 +52,7 @@
                                 </td>
                                 <td><a href="#" class="icon"><i class="ti-close"></i></a></td>
                                 <td>
-                                    <h2 class="td-color">{{price}}€</h2>
+                                    <h2 class="td-color">{{price}} €</h2>
                                 </td>
                             </tr>
                             {{/each}}
@@ -72,7 +65,7 @@
                                 <tr>
                                     <td>total price :</td>
                                     <td>
-                                        <h2>{{subTotal}}</h2>
+                                        <h2>{{subTotal}} €</h2>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -81,7 +74,7 @@
                 </div>
             </div>
             <div class="row cart-buttons">
-                <div class="col-6"><a href="/product/allproduct" class="btn btn-solid">continue shopping</a></div>
+                <div class="col-6"><a href="/product" class="btn btn-solid">continue shopping</a></div>
                 <div class="col-6"><a href="/order/checkout" class="btn btn-solid">check out</a></div>
             </div>
         </div>

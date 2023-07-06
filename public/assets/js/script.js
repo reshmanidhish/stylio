@@ -989,54 +989,6 @@
         ]
     });
 
-    $('.brand-6').slick({
-        dots: false,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 6,
-        slidesToScroll: 6,
-        responsive: [{
-            breakpoint: 1367,
-            settings: {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                infinite: true
-            }
-        },
-        {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                infinite: true
-            }
-        },
-        {
-            breakpoint: 767,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2
-            }
-        },
-        {
-            breakpoint: 360,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        }
-
-        ]
-    });
-
     $('.product-slider-5').slick({
         dots: false,
         infinite: true,
@@ -1091,43 +1043,43 @@
         ]
     });
 
-    $('.slide-7').slick({
-        dots: false,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 7,
-        slidesToScroll: 7,
-        responsive: [{
-            breakpoint: 1367,
-            settings: {
-                slidesToShow: 6,
-                slidesToScroll: 6
-            }
-        },
-        {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                infinite: true
-            }
-        },
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3
-            }
-        }
-        ]
-    });
+    // $('.slide-7').slick({
+    //     dots: false,
+    //     infinite: true,
+    //     speed: 300,
+    //     slidesToShow: 7,
+    //     slidesToScroll: 7,
+    //     responsive: [{
+    //         breakpoint: 1367,
+    //         settings: {
+    //             slidesToShow: 6,
+    //             slidesToScroll: 6
+    //         }
+    //     },
+    //     {
+    //         breakpoint: 1024,
+    //         settings: {
+    //             slidesToShow: 5,
+    //             slidesToScroll: 5,
+    //             infinite: true
+    //         }
+    //     },
+    //     {
+    //         breakpoint: 600,
+    //         settings: {
+    //             slidesToShow: 4,
+    //             slidesToScroll: 4
+    //         }
+    //     },
+    //     {
+    //         breakpoint: 480,
+    //         settings: {
+    //             slidesToShow: 3,
+    //             slidesToScroll: 3
+    //         }
+    //     }
+    //     ]
+    // });
 
     $('.slide-7-demo').slick({
         dots: false,
