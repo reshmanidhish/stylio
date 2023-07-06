@@ -19,17 +19,17 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/register", async (req, res, next) => {
   const categories = await Category.find();
-  if (req.session.currentUser) {
+  if (req?.session?.currentUser) {
+    res.redirect("/auth/profile");
+  } else {
     res.render("auth/register", { loggedIn: true, categories });
   }
-  res.render("auth/register", { categories });
 });
 
 router.post("/register", async (req, res, next) => {
   const categories = await Category.find();
   try {
     const { firstName, lastName, email, password ,address,phoneNumber} = req.body;
-
     if (email === "" || password === "") {
       res.status(400).render("auth/register", {
         categories,
@@ -59,8 +59,8 @@ router.post("/register", async (req, res, next) => {
       password: hashedpassword,
     });
 
-    req.session.currentUser = { email, firstName, lastName,address,phoneNumber};
-    res.redirect(`/`);
+    //req.session.currentUser = { email, firstName, lastName,address,phoneNumber};
+    res.redirect('/auth/login');
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       res.status(500).render("auth/register", { errorMessage: error.message });
@@ -77,14 +77,15 @@ router.post("/register", async (req, res, next) => {
 
 router.get("/profile", isLoggedIn, async (req, res, next) => {
   try {
+    const categories = await Category.find();
     if (req.session.currentUser) {
-      const findUserfromDB = await User.findOne({
+      const currentUser = await User.findOne({
         email: req.session.currentUser.email,
       });
-      findUserfromDB.loggedIn = true;
-      res.render("auth/profile", findUserfromDB);
+      currentUser.loggedIn = true;
+      res.render("auth/profile", {currentUser, categories});
     } else {
-      res.render("auth/register");
+      res.render("auth/register",  {categories});
     }
   } catch (err) {
     console.log("error while rendering profile", err);
@@ -141,7 +142,7 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
       console.log('user=======> {}', currentUser)
 
       req.session.currentUser = currentUser
-      res.redirect("/");
+      res.redirect("/auth/profile");
     } else {
       res.render("auth/login", { errorMessage: "Wrong credentials." });
     }
@@ -156,7 +157,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
       return;
     }
 
-    res.redirect("/");
+    res.redirect("/auth/login");
   });
 });
 

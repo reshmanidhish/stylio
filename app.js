@@ -22,6 +22,13 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 require("./config/session")(app)
+app.use((req, res, next) => {
+    if (req.url.includes('/assets/images/')) {
+      res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours (adjust as needed)
+    }
+    next();
+  });
+
 
 const capitalize = require("./utils/capitalize");
 const projectName = "stylio";
