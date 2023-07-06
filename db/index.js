@@ -24,7 +24,6 @@ mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    maxPoolSize: 10
   })
   .then(() => {
     console.log("Connected to MongoDB.");
@@ -32,7 +31,6 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to MongoDB: ", err);
   });
-
 
 // Close the MongoDB connection when the application is shutting down
 process.on("SIGINT", () => {

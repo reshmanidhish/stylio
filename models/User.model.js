@@ -35,6 +35,14 @@ const userSchema = new Schema(
       type: Number,
       required: true,
     },
+    city_state: {
+      type: String,
+      required: true,
+    },
+
+    imageURL: {
+      type: String,
+    },
 
    },
   

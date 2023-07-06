@@ -1,57 +1,125 @@
 <!--section start-->
 <section class="register-page section-b-space">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>create account</h3>
-                <div class="theme-card">
-                    <form class="theme-form" action="/auth/register" method="post">
-                        <div class="form-row row">
-                            <div class="col-md-6">
-                                <label>First Name</label>
-                                <input type="text" name="firstName" class="form-control" id="fname"
-                                    placeholder="First Name" required="">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Last Name</label>
-                                <input type="text" name="lastName" class="form-control" id="lname"
-                                    placeholder="Last Name" required="">
-                            </div>
-                        </div>
-                        <div class="form-row row">
-                            <div class="col-md-6">
-                                <label>email</label>
-                                <input type="text" name="email" class="form-control" id="email" placeholder="Email"
-                                    required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" class="form-control" id="review"
-                                    placeholder="Enter your password" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label>address</label>
-                                <textarea class="form-control mb-0" name="address" class="form-control" id="lname"
-                                    placeholder="Address" required=""></textarea>
-                            </div>
-                            <div class="col-md-6">
-                                <label>phoneNumber</label>
-                                <input type="text" name="phoneNumber" class="form-control" id="lname"
-                                    placeholder="PhoneNumber" required="">
-                            </div>
-
-                            <button type="submit" style="margin-left: 0.7rem" class="btn btn-solid w-auto">CREATE AN
-                                ACCOUNT</button>
-
-                        </div>
-                        {{#if errorMessage}}
-                        <p class="error">
-                            {{errorMessage}}</p>
-                        {{/if}}
-                    </form>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>create account</h3>
+        <div class="theme-card">
+          <form
+            class="theme-form"
+            action="/auth/register"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="form-row row">
+              <div class="col-md-6">
+                <label>First Name</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  class="form-control"
+                  id="fname"
+                  placeholder="First Name"
+                  required=""
+                />
+              </div>
+              <div class="col-md-6">
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  class="form-control"
+                  id="lname"
+                  placeholder="Last Name"
+                  required=""
+                />
+              </div>
             </div>
+            <div class="form-row row">
+              <div class="col-md-6">
+                <label>email</label>
+                <input
+                  type="text"
+                  name="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  id="review"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label>street address</label>
+                <textarea
+                  class="form-control mb-0"
+                  name="address"
+                  class="form-control"
+                  id="lname"
+                  placeholder="Address"
+                  required=""
+                ></textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label>phoneNumber</label>
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  class="form-control"
+                  id="lname"
+                  placeholder="001234567"
+                  required=""
+                />
+              </div>
+              <div class="col-md-6">
+                <label>city/state</label>
+                <input
+                  type="text"
+                  name="city_state"
+                  class="form-control"
+                  id="lname"
+                  placeholder="city/state"
+                  required=""
+                />
+              </div>
+
+              <div class="col-md-6">
+                <label for="review">Profile Image</label>
+                <input
+                  type="file"
+                  name="register-image-cover"
+                  class="form-control"
+                  id="lname"
+                  placeholder="Select"
+                  required=""
+                />
+              </div>
+
+              <button
+                type="submit"
+                style="margin-left: 0.7rem"
+                class="btn btn-solid w-auto"
+              >CREATE AN ACCOUNT</button>
+
+            </div>
+            {{#if errorMessage}}
+              <p class="error">
+                {{errorMessage}}</p>
+            {{/if}}
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <!--Section ends-->

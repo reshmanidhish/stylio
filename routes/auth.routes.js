@@ -14,6 +14,7 @@ const Category = require("../models/Category.model");
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const fileUploader = require("../config/cloudinary.config");
 
 // GET /auth/register
 
@@ -26,10 +27,14 @@ router.get("/register", async (req, res, next) => {
   }
 });
 
-router.post("/register", async (req, res, next) => {
+
+
+router.post("/register", fileUploader.single("register-image-cover"), async (req, res, next) => {
+  console.log(req.body)
   const categories = await Category.find();
   try {
-    const { firstName, lastName, email, password ,address,phoneNumber} = req.body;
+    const { firstName, lastName, city_state , email, password ,address, phoneNumber} = req.body;
+
     if (email === "" || password === "") {
       res.status(400).render("auth/register", {
         categories,
@@ -38,8 +43,10 @@ router.post("/register", async (req, res, next) => {
       });
       return;
     }
+    
 
     if (password.length < 6) {
+      
       res.status(400).render("auth/register", {
         categories,
         errorMessage: "Your password needs to be at least 6 characters long.",
@@ -55,12 +62,15 @@ router.post("/register", async (req, res, next) => {
       lastName,
       address,
       phoneNumber,
+      imageURL: req.file.path,
+      city_state,
       userType: "customer",
       password: hashedpassword,
     });
 
-    //req.session.currentUser = { email, firstName, lastName,address,phoneNumber};
-    res.redirect('/auth/login');
+    req.session.currentUser = { email,imageURL:req.file.path, firstName, lastName,address,phoneNumber, loggedIn:true};
+    
+    res.redirect(`/auth/profile`);
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       res.status(500).render("auth/register", { errorMessage: error.message });
@@ -75,22 +85,53 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
-router.get("/profile", isLoggedIn, async (req, res, next) => {
+
+
+router.get("/profile",  isLoggedIn, async (req, res, next) => {
   try {
-    const categories = await Category.find();
-    if (req.session.currentUser) {
-      const currentUser = await User.findOne({
+    let{currentUser,cartItems,subTotal}=req.session
+    const categories = await Category.find()
+      const findUserfromDB = await User.findOne({
         email: req.session.currentUser.email,
       });
-      currentUser.loggedIn = true;
-      res.render("auth/profile", {currentUser, categories});
-    } else {
-      res.render("auth/register",  {categories});
-    }
+       if(findUserfromDB){
+        res.render("auth/profile", {findUserfromDB, categories, currentUser,cartItems,subTotal});
+       }else{
+        res.render("index", { categories, cartItems,subTotal } );
+       }
   } catch (err) {
     console.log("error while rendering profile", err);
   }
 });
+
+
+router.get("/:id/edit", isLoggedIn, async (req, res, next)=> {
+  try {
+    let{currentUser,cartItems,subTotal}=req.session
+  const catergorie = await Category.find()
+  const profilebyId = await User.findById(req.params.id)
+  profilebyId.loggedIn = true
+  res.render("auth/edit-profile", {profilebyId, catergorie, currentUser,cartItems,subTotal})
+
+  }catch (err) {
+    console.log("error while rendering profile edit", err);
+  }
+})
+
+router.post("/:id/edit", fileUploader.single("product-image-cover"), isLoggedIn, async (req, res, next) => {
+  try {
+    if(req.session.currentUser) {
+      const {id} = req.params
+    const catergorie = await Category.find()
+    const profileEdit = await User.create( { firstName, lastName, email, password ,address,phoneNumber})
+    res.render("auth/edit-profile",{profileEdit, catergorie})
+  } else {
+    res.render("auth/edit-profile", {profileEdit, catergorie})
+  }
+  } catch (err) {
+    console.log("error while rendering profile post", err);
+  }
+})
 
 // GET /auth/login
 router.get("/login", isLoggedOut, async(req, res) => {
@@ -146,8 +187,25 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
     } else {
       res.render("auth/login", { errorMessage: "Wrong credentials." });
     }
-  } catch (err) {}
+  }catch (err) {
+    console.log("error while login ", err);
+  }
 });
+
+
+router.get("/:id/login", async (req, res, next)=> {
+  try {
+ if(req.session.currentUser) {
+  const categories = await Category.find()
+  const byId = await User.findById(req.params.id)
+  byId.loggedIn = true
+  res.render("auth/login-details", {byId, categories })
+ }
+  }catch (err) {
+    console.log("error while getting edit", err);
+  }
+})
+
 
 // GET /auth/logout
 router.get("/logout", isLoggedIn, (req, res) => {
@@ -160,5 +218,6 @@ router.get("/logout", isLoggedIn, (req, res) => {
     res.redirect("/auth/login");
   });
 });
+
 
 module.exports = router;
