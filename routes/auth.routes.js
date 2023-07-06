@@ -27,13 +27,10 @@ router.get("/register", async (req, res, next) => {
   }
 });
 
-
-
 router.post("/register", fileUploader.single("register-image-cover"), async (req, res, next) => {
-  console.log(req.body)
   const categories = await Category.find();
   try {
-    const { firstName, lastName, city_state , email, password ,address, phoneNumber} = req.body;
+    const { firstName, lastName, city_state, email, password ,address,phoneNumber} = req.body;
 
     if (email === "" || password === "") {
       res.status(400).render("auth/register", {
