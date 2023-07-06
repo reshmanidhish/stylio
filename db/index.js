@@ -22,7 +22,6 @@ const MONGO_URI =
 // Connect to MongoDB
 mongoose
   .connect(MONGO_URI, {
-    poolSize: 10, // Adjust the pool size as per your needs
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
