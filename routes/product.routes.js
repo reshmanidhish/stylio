@@ -128,7 +128,7 @@ router.get("/:id/edit", async (req, res, next) => {
   }
 });
 
-router.post("/:id/edit", isLoggedIn,fileUploader.single("product-image-cover"), async (req, res, next) => {
+router.post("/:id/edit", isLoggedIn, fileUploader.single("product-image-cover"), async (req, res, next) => {
   try {
     if (req.session.currentUser) {
       const { id } = req.params;
