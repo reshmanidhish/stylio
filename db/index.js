@@ -6,14 +6,38 @@ const mongoose = require("mongoose");
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
 const MONGO_URI =
-process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/stylio";
+  process.env.MONGODB_URI || `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@stylio.qqrx8ll.mongodb.net/stylio`;
 
+// mongoose
+//   .connect(MONGO_URI)
+//   .then((x) => {
+//     const databaseName = x.connections[0].name;
+//     console.log(`Connected to Mongo! Database name: "${databaseName}"`);
+//   })
+//   .catch((err) => {
+//     console.error("Error connecting to mongo: ", err);
+//   });
+
+
+// Connect to MongoDB
 mongoose
-  .connect(MONGO_URI)
-  .then((x) => {
-    const databaseName = x.connections[0].name;
-    console.log(`Connected to Mongo! Database name: "${databaseName}"`);
+  .connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    maxPoolSize: 10
+  })
+  .then(() => {
+    console.log("Connected to MongoDB.");
   })
   .catch((err) => {
-    console.error("Error connecting to mongo: ", err);
+    console.error("Error connecting to MongoDB: ", err);
   });
+
+
+// Close the MongoDB connection when the application is shutting down
+process.on("SIGINT", () => {
+  mongoose.connection.close(() => {
+    console.log("MongoDB connection closed.");
+    process.exit(0);
+  });
+});
