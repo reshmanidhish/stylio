@@ -28,7 +28,7 @@
                     <div class="dashboard-sidebar">
                         <div class="profile-top">
                             <div class="profile-image">
-                                <img src="{{imageURL}}" alt="" class="img-fluid">
+                                <img src="{{findUserfromDB.imageURL}}" alt="" class="img-fluid">
                             </div>
                             <div class="profile-detail">
                                 <h5>{{findUserfromDB.firstName}} {{findUserfromDB.lastName}}</h5>
@@ -109,7 +109,7 @@
                                         <div class="col-sm-6">
                                             <div class="box">
                                                 <div class="box-title">
-                                                    <h3>Contact Information</h3><a href="/auth/{{profilebyId.id}}/edit">Edit</a>
+                                                    <h3>Contact Information</h3><a href="/auth/{{findUserfromDB._id}}/edit">Edit</a>
                                                 </div>
                                                 <div class="box-content">
                                                     <h6>{{findUserfromDB.firstName}} {{findUserfromDB.lastName}}</h6>
@@ -131,12 +131,12 @@
                                     </div>
                                     <div class="box mt-3">
                                         <div class="box-title">
-                                            <h3>Address Book</h3><a href="/auth/{{profilebyId.id}}/edit">Manage Addresses</a>
+                                            <h3>Address Book</h3><a href="/auth/{{findUserfromDB._id}}/edit">Manage Addresses</a>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <h6>Default Billing Address</h6>
-                                                <address>You have not set a default billing address.<br><a href="/auth/{{profilebyId.id}}/edit">Edit
+                                                <address>You have not set a default billing address.<br><a href="/auth/{{findUserfromDB._id}}/edit">Edit
                                                         Address</a></address>
                                             </div>
                                          
@@ -528,7 +528,7 @@
                                                                 </div>
                                                                 <div class="right">
                                                                     <h6>{{findUserfromDB.email}}<a class="edit-link"
-                                                                            href="/auth/{{byId.id}}/login">edit</a></h6>
+                                                                            href="/auth/{{findUserfromDB._id}}/login">edit</a></h6>
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -538,10 +538,10 @@
                                                                 <div class="left">
                                                                     <h6>Password</h6>
                                                                 </div>
-                                                                <div class="right">
-                                                                    <h6>******* <a class="edit-link" href="/auth/{{byId.id}}/login">Edit</a>
+                                                                {{!-- <div class="right">
+                                                                    <h6>******* <a class="edit-link" href="/auth/{{findUserfromDB._id}}/login">Edit</a>
                                                                     </h6>
-                                                                </div>
+                                                                </div> --}}
                                                             </div>
                                                         </li>
                                                     </ul>
