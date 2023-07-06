@@ -89,14 +89,14 @@ router.post("/register", fileUploader.single("register-image-cover"), async (req
 router.get("/profile",  isLoggedIn, async (req, res, next) => {
   try {
     let{currentUser,cartItems,subTotal}=req.session
-    const catergories = await Category.find()
+    const categories = await Category.find()
       const findUserfromDB = await User.findOne({
         email: req.session.currentUser.email,
       });
        if(findUserfromDB){
-        res.render("auth/profile", {findUserfromDB, catergories, currentUser,cartItems,subTotal});
+        res.render("auth/profile", {findUserfromDB, categories, currentUser,cartItems,subTotal});
        }else{
-        res.render("index", { catergories, cartItems,subTotal } );
+        res.render("index", { categories, cartItems,subTotal } );
        }
   } catch (err) {
     console.log("error while rendering profile", err);
