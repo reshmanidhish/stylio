@@ -68,8 +68,9 @@ router.post("/register", fileUploader.single("register-image-cover"), async (req
       password: hashedpassword,
     });
 
-    req.session.currentUser = { email,imageURL:req.file.path, firstName, lastName,address,phoneNumber};
-    res.redirect(`/`);
+    req.session.currentUser = { email,imageURL:req.file.path, firstName, lastName,address,phoneNumber, loggedIn:true};
+    
+    res.redirect(`/auth/profile`);
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       res.status(500).render("auth/register", { errorMessage: error.message });
