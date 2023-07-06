@@ -88,7 +88,7 @@ router.post("/register", fileUploader.single("register-image-cover"), async (req
 
 
 router.get("/profile",  isLoggedIn, async (req, res, next) => {
-  try {
+  try {//totalOrders
     let{currentUser,cartItems,subTotal}=req.session
     const categories = await Category.find()
       const findUserfromDB = await User.findOne({
@@ -179,9 +179,7 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
         phoneNumber: user.phoneNumber,
         loggedIn: true
       }
-      
-      console.log('user=======> {}', currentUser)
-
+  
       req.session.currentUser = currentUser
       res.redirect("/auth/profile");
     } else {
