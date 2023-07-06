@@ -26,10 +26,13 @@ router.get("/register", async (req, res, next) => {
   res.render("auth/register", { categories });
 });
 
+
+
 router.post("/register", fileUploader.single("register-image-cover"), async (req, res, next) => {
+  console.log(req.body)
   const categories = await Category.find();
   try {
-    const { firstName, lastName, city_state, email, password ,address,phoneNumber} = req.body;
+    const { firstName, lastName, city_state , email, password ,address, phoneNumber} = req.body;
 
     if (email === "" || password === "") {
       res.status(400).render("auth/register", {
@@ -39,8 +42,10 @@ router.post("/register", fileUploader.single("register-image-cover"), async (req
       });
       return;
     }
+    
 
     if (password.length < 6) {
+      
       res.status(400).render("auth/register", {
         categories,
         errorMessage: "Your password needs to be at least 6 characters long.",
@@ -62,7 +67,7 @@ router.post("/register", fileUploader.single("register-image-cover"), async (req
       password: hashedpassword,
     });
 
-    req.session.currentUser = { email, firstName, lastName,address,phoneNumber};
+    req.session.currentUser = { email,imageURL, firstName, lastName,address,phoneNumber};
     res.redirect(`/`);
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
@@ -87,9 +92,11 @@ router.get("/profile",  isLoggedIn, async (req, res, next) => {
       const findUserfromDB = await User.findOne({
         email: req.session.currentUser.email,
       });
-      findUserfromDB.loggedIn = true;
-      res.render("auth/profile", {findUserfromDB, catergories,  currentUser,cartItems,subTotal});
-  
+       if(findUserfromDB){
+        res.render("auth/profile", {findUserfromDB, catergories, currentUser,cartItems,subTotal});
+       }else{
+        res.render("index", { catergories, cartItems,subTotal } );
+       }
   } catch (err) {
     console.log("error while rendering profile", err);
   }
