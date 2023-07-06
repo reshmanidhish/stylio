@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <h3>create account</h3>
                 <div class="theme-card">
-                    <form class="theme-form" action="/auth/register" method="post">
+                    <form class="theme-form" action="/auth/register" method="post" enctype="multipart/form-data">
                         <div class="form-row row">
                             <div class="col-md-6">
                                 <label>First Name</label>
@@ -30,16 +30,30 @@
                                     placeholder="Enter your password" required>
                             </div>
                             <div class="col-md-6">
-                                <label>address</label>
+                                <label>street address</label>
                                 <textarea class="form-control mb-0" name="address" class="form-control" id="lname"
                                     placeholder="Address" required=""></textarea>
                             </div>
+
+
                             <div class="col-md-6">
                                 <label>phoneNumber</label>
                                 <input type="text" name="phoneNumber" class="form-control" id="lname"
-                                    placeholder="PhoneNumber" required="">
+                                    placeholder="001234567" required="">
                             </div>
+                              <div class="col-md-6">
+                                <label>city/state</label>
+                                <input type="text" name="city_state" class="form-control" id="lname"
+                                    placeholder="city/state" required="">
+                            </div>
+                             
 
+           <div class="col-md-6">
+              <label for="review">Profile Image</label>
+              <input type="file" name="register-image-cover" class="form-control"  id="lname"
+                placeholder="Select" required="">
+            </div>
+          
                             <button type="submit" style="margin-left: 0.7rem" class="btn btn-solid w-auto">CREATE AN
                                 ACCOUNT</button>
 

@@ -1,6 +1,7 @@
 body{
     margin: 0px;
     padding: 0px;
+ 
 }
 
 .product-box .cart-info.cart-wrap, .product-box .cart-wrap.cart-wrap, .product-wrap .cart-info.cart-wrap, .product-wrap .cart-wrap.cart-wrap {
@@ -13,3 +14,9 @@ body{
 .slick-slide {
     height: auto;
 }
+
+
+
+
+
+

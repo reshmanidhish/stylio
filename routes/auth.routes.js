@@ -14,6 +14,7 @@ const Category = require("../models/Category.model");
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const fileUploader = require("../config/cloudinary.config");
 
 // GET /auth/register
 
@@ -25,10 +26,10 @@ router.get("/register", async (req, res, next) => {
   res.render("auth/register", { categories });
 });
 
-router.post("/register", async (req, res, next) => {
+router.post("/register", fileUploader.single("register-image-cover"), async (req, res, next) => {
   const categories = await Category.find();
   try {
-    const { firstName, lastName, email, password ,address,phoneNumber} = req.body;
+    const { firstName, lastName, city_state, email, password ,address,phoneNumber} = req.body;
 
     if (email === "" || password === "") {
       res.status(400).render("auth/register", {
@@ -55,6 +56,8 @@ router.post("/register", async (req, res, next) => {
       lastName,
       address,
       phoneNumber,
+      imageURL: req.file.path,
+      city_state,
       userType: "customer",
       password: hashedpassword,
     });
@@ -75,21 +78,51 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
-router.get("/profile", isLoggedIn, async (req, res, next) => {
+
+
+router.get("/profile",  isLoggedIn, async (req, res, next) => {
   try {
-    if (req.session.currentUser) {
+    let{currentUser,cartItems,subTotal}=req.session
+    const catergories = await Category.find()
       const findUserfromDB = await User.findOne({
         email: req.session.currentUser.email,
       });
       findUserfromDB.loggedIn = true;
-      res.render("auth/profile", findUserfromDB);
-    } else {
-      res.render("auth/register");
-    }
+      res.render("auth/profile", {findUserfromDB, catergories,  currentUser,cartItems,subTotal});
+  
   } catch (err) {
     console.log("error while rendering profile", err);
   }
 });
+
+
+router.get("/:id/edit", isLoggedIn, async (req, res, next)=> {
+  try {
+    let{currentUser,cartItems,subTotal}=req.session
+  const catergorie = await Category.find()
+  const profilebyId = await User.findById(req.params.id)
+  profilebyId.loggedIn = true
+  res.render("auth/edit-profile", {profilebyId, catergorie, currentUser,cartItems,subTotal})
+
+  }catch (err) {
+    console.log("error while rendering profile edit", err);
+  }
+})
+
+router.post("/:id/edit", fileUploader.single("product-image-cover"), isLoggedIn, async (req, res, next) => {
+  try {
+    if(req.session.currentUser) {
+      const {id} = req.params
+    const catergorie = await Category.find()
+    const profileEdit = await User.create( { firstName, lastName, email, password ,address,phoneNumber})
+    res.render("auth/edit-profile",{profileEdit, catergorie})
+  } else {
+    res.render("auth/edit-profile", {profileEdit, catergorie})
+  }
+  } catch (err) {
+    console.log("error while rendering profile post", err);
+  }
+})
 
 // GET /auth/login
 router.get("/login", isLoggedOut, async(req, res) => {
@@ -145,8 +178,25 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
     } else {
       res.render("auth/login", { errorMessage: "Wrong credentials." });
     }
-  } catch (err) {}
+  }catch (err) {
+    console.log("error while login ", err);
+  }
 });
+
+
+router.get("/:id/login", async (req, res, next)=> {
+  try {
+ if(req.session.currentUser) {
+  const categories = await Category.find()
+  const byId = await User.findById(req.params.id)
+  byId.loggedIn = true
+  res.render("auth/login-details", {byId, categories })
+ }
+  }catch (err) {
+    console.log("error while getting edit", err);
+  }
+})
+
 
 // GET /auth/logout
 router.get("/logout", isLoggedIn, (req, res) => {
@@ -159,5 +209,6 @@ router.get("/logout", isLoggedIn, (req, res) => {
     res.redirect("/");
   });
 });
+
 
 module.exports = router;
