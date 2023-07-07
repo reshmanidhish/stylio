@@ -3,14 +3,14 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="page-title">
-          <h2><a href="/auth/profile">Profile</a></h2>
+          <h2><a style="color: rgb(94, 92, 92);" href="/auth/profile">Profile</a></h2>
         </div>
       </div>
       <div class="col-sm-6">
         <nav aria-label="breadcrumb" class="theme-breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/auth/profile">Profile</a></li>
-            <li class="breadcrumb-item active"><a href="/auth/edit-profile">Edit Profile</a></li>
+            <li class="breadcrumb-item active"><a href="/auth/edit-profile"> details</a></li>
           </ol>
         </nav>
       </div>
@@ -33,7 +33,7 @@
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
                     {{!-- <button class="btn btn-primary" type="button">Upload new image</button> --}}
-                    <a class="btn btn-primary" href="/auth/{{profilebyId._id}}/imag">Upload new image</a>
+                    <a class="btn btn-primary" style="background-color: #d4b196; border-color:#d4b196; border: transparent;" href="/auth/{{profilebyId._id}}/imag">Upload new image</a>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
                        
                         </div>
                         <!-- Save changes button-->
-                        <button class="btn btn-primary" type="submit" >Save changes</button>
+                        <button class="btn btn-primary"  style="background-color: #d4b196; border-color:#d4b196; border: transparent;" type="submit" >Save changes</button>
                     </form>
                 </div>
             </div>
