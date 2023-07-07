@@ -1,9 +1,9 @@
-<section class="login-page section-b-space">
+<section style="margin-left: 30rem;" class="login-page section-b-space">
   <form action="/auth/{{byId.id}}/login" method="POST">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
-          <h3>Login</h3>
+          <h3>Edit</h3>
           <div class="theme-card">
             <form class="theme-form">
               <div class="form-group">
@@ -15,22 +15,10 @@
                 <input type="password" name="password" class="form-control" id="review"
                   value="{{byId.password}}" required="">
               </div>
-               <button type="submit" class="btn btn-solid">Log In</button>
+               <button type="submit" class="btn btn-solid">Update</button>
             </form>
           </div>
-        </div>
-        <div class="col-lg-6 right-login">
-          <h3>New Customer</h3>
-          <div class="theme-card authentication-right">
-            <h6 class="title-font">Create A Account</h6>
-            <p>Edit account </p><a href="/auth/register" class="btn btn-solid">Update Account</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    {{#if errorMessage}}
-    <p class="error">{{errorMessage}}</p>
-    {{/if}}
+        </div> 
   </form>
 </section>
 <!--Section ends-->
