@@ -122,8 +122,8 @@ router.post("/:id/edit", fileUploader.single("product-image-cover"), isLoggedIn,
   try {
     if(req.session.currentUser) {
       const {id} = req.params
-  const { firstName, lastName, email, password ,address, phoneNumber} = req.body;
-    const profileEdit = await User.findByIdAndUpdate(id, { firstName, userType: "customer",  lastName, email, password ,address, phoneNumber})
+  const { firstName, lastName, city_state, email, password ,address, phoneNumber} = req.body;
+    const profileEdit = await User.findByIdAndUpdate(id, { firstName, userType: req.session.currentUser.userType,  lastName, email, password ,city_state, address, phoneNumber})
     res.redirect("/auth/profile")
   } else {
     res.render("auth/edit-profile", {profileEdit})

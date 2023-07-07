@@ -21,6 +21,10 @@
 
   <!--Slick slider css-->
   <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick.css">
+  
+    <!-- Price range icon -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/vendors/price-range.css">
+
   <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick-theme.css">
 
   <!-- Animate icon -->
@@ -62,7 +66,7 @@
             <ul class="header-dropdown">
               {{#if currentUser.loggedIn}}
               <li class="onhover-dropdown mobile-account"><i class="fa fa-user" aria-hidden="true"></i>
-                Welcome {{currentUser.firstName}}
+                Welcome {{currentUser.firstName}}{{#ifEquals currentUser.userType "admin"}} (Admin) {{/ifEquals}}
                 <ul class="onhover-show-div">
                   <li><a href="/auth/profile">profile</a></li>
                   <li>
@@ -402,6 +406,9 @@
 
   <!-- slick js-->
   <script src="/assets/js/slick.js"></script>
+
+  <!-- price range js -->
+  <script src="/assets/js/price-range.js"></script>
 
   <!-- Bootstrap js-->
   {{!-- <script src="/assets/js/bootstrap.bundle.min.js"></script> --}}
