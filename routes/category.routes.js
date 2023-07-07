@@ -5,8 +5,13 @@ const Category = require("../models/Category.model");
 
 
 router.get('/create', async (req, res, next) => {
-    const categories = await Category.find();
-    res.render('category/create', {categories})
+    let {cartItems, currentUser,subTotal}=req.session
+    const categories = await Category.find(); 
+    if(!cartItems) {
+      cartItems = []
+      req.session.cartItems = cartItems
+    }
+    res.render('category/create', {categories, currentUser, subTotal})
 })
 
 router.post('/create', async (req,res, next)=> {

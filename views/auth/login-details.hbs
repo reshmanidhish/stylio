@@ -1,9 +1,29 @@
-<section class="login-page section-b-space">
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-title">
+          <h2><a style="color: rgb(94, 92, 92);" href="/auth/profile">Profile</a></h2>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <nav aria-label="breadcrumb" class="theme-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/auth/profile">login</a></li>
+            <li class="breadcrumb-item active"><a href="/auth/edit-profile">details</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section style="margin-left: 30rem;" class="login-page section-b-space">
   <form action="/auth/{{byId.id}}/login" method="POST">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
-          <h3>Login</h3>
+          <h3>Edit</h3>
           <div class="theme-card">
             <form class="theme-form">
               <div class="form-group">
@@ -15,22 +35,10 @@
                 <input type="password" name="password" class="form-control" id="review"
                   value="{{byId.password}}" required="">
               </div>
-               <button type="submit" class="btn btn-solid">Log In</button>
+               <button type="submit" class="btn btn-solid">Update</button>
             </form>
           </div>
-        </div>
-        <div class="col-lg-6 right-login">
-          <h3>New Customer</h3>
-          <div class="theme-card authentication-right">
-            <h6 class="title-font">Create A Account</h6>
-            <p>Edit account </p><a href="/auth/register" class="btn btn-solid">Update Account</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    {{#if errorMessage}}
-    <p class="error">{{errorMessage}}</p>
-    {{/if}}
+        </div> 
   </form>
 </section>
 <!--Section ends-->

@@ -108,10 +108,10 @@ router.get("/profile",  isLoggedIn, async (req, res, next) => {
 router.get("/:id/edit", isLoggedIn, async (req, res, next)=> {
   try {
     let{currentUser,cartItems,subTotal}=req.session
-  const catergorie = await Category.find()
+  const categories = await Category.find()
   const profilebyId = await User.findById(req.params.id)
   profilebyId.loggedIn = true
-  res.render("auth/edit-profile", {profilebyId, catergorie, currentUser,cartItems,subTotal})
+  res.render("auth/edit-profile", {profilebyId, categories, currentUser,cartItems,subTotal})
 
   }catch (err) {
     console.log("error while rendering profile edit", err);
@@ -122,11 +122,11 @@ router.post("/:id/edit", fileUploader.single("product-image-cover"), isLoggedIn,
   try {
     if(req.session.currentUser) {
       const {id} = req.params
-    const catergorie = await Category.find()
-    const profileEdit = await User.create( { firstName, lastName, email, password ,address,phoneNumber})
-    res.render("auth/edit-profile",{profileEdit, catergorie})
+  const { firstName, lastName, city_state, email, password ,address, phoneNumber} = req.body;
+    const profileEdit = await User.findByIdAndUpdate(id, { firstName, userType: req.session.currentUser.userType,  lastName, email, password ,city_state, address, phoneNumber})
+    res.redirect("/auth/profile")
   } else {
-    res.render("auth/edit-profile", {profileEdit, catergorie})
+    res.render("auth/edit-profile", {profileEdit})
   }
   } catch (err) {
     console.log("error while rendering profile post", err);
@@ -191,7 +191,7 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
 });
 
 
-router.get("/:id/login", async (req, res, next)=> {
+router.get("/:id/login",isLoggedIn, async (req, res, next)=> {
   try {
  if(req.session.currentUser) {
   const categories = await Category.find()
@@ -203,6 +203,61 @@ router.get("/:id/login", async (req, res, next)=> {
     console.log("error while getting edit", err);
   }
 })
+
+
+
+router.post("/:id/login", async (req, res, next)=> {
+  try {
+    const {id} = req.params
+    const {email, password} = req.body;
+    const updatecurrentUser = await User.findByIdAndUpdate(id, {email, password})
+    updatecurrentUser.loggedIn =true
+    if(updatecurrentUser) {
+      res.redirect("/auth/profile")
+    }else{
+      res.render("auth/login-details")
+    }
+  } catch (err) {
+    console.log("error while updating", err);
+  }
+});
+
+
+
+router.get("/:id/imag",isLoggedIn, async (req, res, next)=> {
+  try {
+ if(req.session.currentUser) {
+  const categories = await Category.find()
+  const editImag = await User.findById(req.params.id)
+  editImag.loggedIn = true
+  res.render("auth/imag-edit", {editImag, categories })
+ }
+  }catch (err) {
+    console.log("error while getting edit", err);
+  }
+});
+
+
+
+
+
+
+router.post("/:id/imag", fileUploader.single("image-cover"), isLoggedIn, async (req, res, next)=> {
+  try {
+    const {id} = req.params
+    const imageUpdate = await User.findByIdAndUpdate(id, { imageURL: req.file.path,})
+    imageUpdate.loggedIn =true
+    if(imageUpdate) {
+      res.redirect("/auth/profile")
+    }else{
+      res.render("auth/imag-details")
+    }
+  } catch (err) {
+    console.log("error while updating image", err);
+  }
+})
+
+
 
 
 // GET /auth/logout

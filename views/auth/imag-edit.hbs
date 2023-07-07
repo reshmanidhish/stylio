@@ -1,0 +1,18 @@
+<section style="margin-left: 30rem;" class="login-page section-b-space">
+  <form action="/auth/{{editImag._id}}/imag" method="POST"   enctype="multipart/form-data">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h3>Edit</h3>
+          <div class="theme-card">
+            <form class="theme-form">
+              <div class="form-group">
+                <label for="image">image</label>
+                <input type="file" name="image-cover" class="form-control" id="email" value="{{editImag.imageURL}}">
+              </div>
+               <button type="submit" class="btn btn-solid">Upload</button>
+            </form>
+          </div>
+        </div>
+  </form>
+</section>
