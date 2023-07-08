@@ -15,7 +15,9 @@ Stylio is an ecommerce platform for home decor, built using Node.js, Express.js,
 - **Handlebars**: A popular templating engine for rendering dynamic HTML pages.
 - **MongoDB Atlas**: A cloud-based managed database service for MongoDB.
 - **Cloudinary**: A cloud-based media management platform for image and video file storage.
-- **Adyen**: A leading payment gateway provider for secure online transactions.
+- **Stripe**: A leading payment gateway provider for secure online transactions.
+- **Mongoose**: A Node.js library providing schema-based data modeling for MongoDB.
+- **Bootstrap**: An open-source framework for developing responsive, mobile-first web projects.
 
 ## Workflow
 [![N|Solid](https://raw.githubusercontent.com/reshmanidhish/diagrams/main/stylio/stylio_flowchart.png)](https://raw.githubusercontent.com/reshmanidhish/diagrams/main/stylio/stylio_flowchart.png)
