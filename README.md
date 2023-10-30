@@ -1,4 +1,7 @@
 # Stylio - An Ecommerce Home Decor Project
+
+Demo - [https://stylio-store.vercel.app/](https://stylio-store.vercel.app/)
+
 Stylio is an ecommerce platform for home decor, built using Node.js, Express.js, Handlebars, MongoDB Atlas, Cloudinary, and Adyen for payment gateway integration. This project allows users to browse and purchase a wide range of home decor items, providing them with a seamless shopping experience.
 
 ## MVP
